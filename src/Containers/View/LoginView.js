@@ -5,24 +5,19 @@
  */
 
 import React, {Component} from 'react';
-import {
-    StyleSheet,
-    Text,
-    View, Dimensions, TextInput, TouchableOpacity, KeyboardAvoidingView
-} from 'react-native';
+import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "react-native-elements/src/icons/Icon";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 type Props = {};
-export default class SignUp extends Component<Props> {
+export default class LoginView extends Component<Props> {
     static navigationOptions = ({
         header: null,
     });
-
     constructor() {
         super();
-        this.state = {username: '', password: '', mail: ''};
+        this.state = {username: '', password: ''};
     }
 
     getUsername(value) {
@@ -37,9 +32,20 @@ export default class SignUp extends Component<Props> {
         })
     }
 
-    getMail(value) {
-        this.setState({
-            mail: value
+    testAPI(){
+        fetch('https://chanphom.com/api-c3/user/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: 'nguyenlinh92',
+                pass: 'linh1212',
+            }),
+        }).then((response) => response.json())
+            .then((res) => {
+            console.log(res);
         })
     }
 
@@ -47,16 +53,8 @@ export default class SignUp extends Component<Props> {
         return (
             <View style={styles.container}>
                 <View>
-                    <TouchableOpacity style={{alignSelf: 'flex-start', marginBottom: 40}} onPress={() => {this.props.navigation.navigate('LoginScreen')}}>
-                        <Icon
-                            name='ios-arrow-round-back-outline'
-                            type='ionicon'
-                            color='white'
-                            size={35}
-                        />
-                    </TouchableOpacity>
                     <Text style={styles.welcome}>
-                        Sign Up
+                        Log In
                     </Text>
                     <View style={{marginBottom: 40}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
@@ -88,7 +86,7 @@ export default class SignUp extends Component<Props> {
                             style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{marginBottom: 40}}>
+                    <View style={{justifyContent: 'center'}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <Icon
                                 name='ios-lock-outline'
@@ -100,15 +98,13 @@ export default class SignUp extends Component<Props> {
                                 onChangeText={(value) => {
                                     this.getPassword(value)
                                 }}
+                                // value={this.state.password}
                                 underlineColorAndroid='transparent'
                                 placeholder='Password'
                                 returnKeyType="go"
                                 placeholderTextColor='#60646E'
                                 selectionColor='white'
                                 secureTextEntry={true}
-                                onSubmitEditing={() => {
-                                    this.emailInput.focus()
-                                }}
                                 ref={(input) => this.passwordInput = input}
                             />
                         </View>
@@ -116,36 +112,26 @@ export default class SignUp extends Component<Props> {
                             style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-mail-outline'
-                                type='ionicon'
-                                color='white'
-                            />
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
-                                onChangeText={(value) => {
-                                    this.getMail(value)
-                                }}
-                                underlineColorAndroid='transparent'
-                                placeholder='E-mail'
-                                returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.emailInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
-                        </View>
-                    </View>
-                    <TouchableOpacity style={styles.loginButton}>
+                    <TouchableOpacity style={styles.loginButton}
+                                        onPress={() => this.testAPI()}>
                         <Text style={styles.loginText}>
-                            Sign Up
+                            Log in
                         </Text>
                     </TouchableOpacity>
+                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                        <Text style={{color: 'white', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
+                            Forgot password?{' '}
+                        </Text>
+                        <TouchableOpacity onPress={() => {
+                            this.props.navigation.navigate('SignUpScreen');
+                            this.usernameInput.clear();
+                            this.passwordInput.clear();
+                        }}>
+                            <Text style={{color: '#A3C2CE', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
+                                Click here
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         );
@@ -173,7 +159,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#21242C',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 70,
+        marginTop: 100,
         marginBottom: 10,
         borderRadius: 70,
         elevation: 5

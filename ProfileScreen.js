@@ -5,10 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {
-    StyleSheet, Text,
-    View, Dimensions, TextInput, TouchableOpacity, FlatList, Image, ImageBackground
-} from 'react-native';
+import {Dimensions, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from "react-native-elements/src/icons/Icon";
 
 
@@ -41,7 +38,7 @@ export default class ProfileScreen extends Component<Props> {
                             type='ionicon'
                             color='black'
                             size={30}
-                        ></Icon>
+                        />
                     </TouchableOpacity>
                     <TouchableOpacity style={{marginLeft: 310, marginTop: 10}}>
                         <Icon
@@ -49,14 +46,14 @@ export default class ProfileScreen extends Component<Props> {
                             type='ionicon'
                             color='black'
                             size={30}
-                        ></Icon>
+                        />
                     </TouchableOpacity>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={{position: 'absolute', top: 90}}
                 >
                     <Image source={require('./wallhaven-367110.png')}
-                           style={{width: 150, height: 150, borderRadius: 80, borderWidth: 2, borderColor: 'white'}}></Image>
+                           style={{width: 150, height: 150, borderRadius: 80, borderWidth: 2, borderColor: 'white'}}/>
                 </TouchableOpacity>
                 <Text
                     style={{
