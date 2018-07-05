@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import CameraView from './View/CameraView';
+import ProfileView from '../View/ProfileView';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CameraView);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

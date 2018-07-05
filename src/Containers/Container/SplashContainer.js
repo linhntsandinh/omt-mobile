@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import SplashView from './View/SplashView';
+import SplashView from '../View/SplashView';
 
 const mapStateToProps = (state) => {
     return {

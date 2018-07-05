@@ -18,19 +18,7 @@ export default class ForgotPasswordView extends Component<Props> {
 
     constructor() {
         super();
-        this.state = {username: '', password: '', mail: ''};
-    }
-
-    getUsername(value) {
-        this.setState({
-            username: value
-        })
-    }
-
-    getPassword(value) {
-        this.setState({
-            password: value
-        })
+        this.state = {mail: ''};
     }
 
     getMail(value) {
@@ -42,8 +30,10 @@ export default class ForgotPasswordView extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <View>
-                    <TouchableOpacity style={{alignSelf: 'flex-start', marginBottom: 40}} onPress={() => {this.props.navigation.navigate('LoginScreen')}}>
+                <View style={{width: 300, marginTop: 50}}>
+                    <TouchableOpacity style={{alignSelf: 'flex-start'}} onPress={() => {
+                        this.props.navigation.navigate('Login')
+                    }}>
                         <Icon
                             name='ios-arrow-round-back-outline'
                             type='ionicon'
@@ -51,39 +41,15 @@ export default class ForgotPasswordView extends Component<Props> {
                             size={35}
                         />
                     </TouchableOpacity>
+                </View>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
                     <Text style={styles.welcome}>
                         Forgot password
                     </Text>
-                    <View style={{marginBottom: 40}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-person-outline'
-                                type='ionicon'
-                                color='white'
-                            />
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
-                                onChangeText={(value) => {
-                                    this.getUsername(value)
-                                }}
-                                underlineColorAndroid='transparent'
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                placeholder='Username'
-                                placeholderTextColor='#60646E'
-                                selectionColor='#60646E'
-                                returnKeyType='next'
-                                keyboardType="email-address"
-                                onSubmitEditing={() => {
-                                    this.passwordInput.focus()
-                                }}
-                                ref={(input) => this.usernameInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
-                        </View>
-                    </View>
                     <View style={{justifyContent: 'center'}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <Icon
@@ -123,7 +89,7 @@ export default class ForgotPasswordView extends Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#434856'
     },

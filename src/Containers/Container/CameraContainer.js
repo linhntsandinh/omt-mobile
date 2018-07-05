@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ForgotPasswordView from "./View/ForgotPasswordView";
+import CameraView from '../View/CameraView';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordView);
+export default connect(mapStateToProps, mapDispatchToProps)(CameraView);

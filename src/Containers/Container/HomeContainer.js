@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import HomeView from './View/HomeView';
-import {AppCreators} from '../redux/AppRedux'
+import HomeView from '../View/HomeView';
+import {AppCreators} from '../../redux/AppRedux'
 
 const mapStateToProps = (state) => {
     return {

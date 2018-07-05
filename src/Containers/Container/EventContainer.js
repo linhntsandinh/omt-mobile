@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import LoginView from './View/LoginView'
+import EventView from '../View/EventView';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginView);
+export default connect(mapStateToProps, mapDispatchToProps)(EventView);

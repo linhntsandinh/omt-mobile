@@ -12,5 +12,5 @@ export default {
     error: 'ios-bug-outline',
     clock: 'ios-clock-outline',
     pencil: 'ios-create-outline',
-    event: 'ios-color-wand-outline'
+    event: 'ios-color-wand-outline',
 };

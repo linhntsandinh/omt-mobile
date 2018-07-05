@@ -5,13 +5,14 @@ import {Icon} from '../Components'
 import {BaseStyles, Colors, Metrics,} from '../Theme';
 import {Icons} from '../Assets'
 //all screen
-import Splash from '../Containers/SplashContainer';
-import Home from '../Containers/HomeContainer';
-import ListForm from '../Containers/ListFormContainer';
-import Event from '../Containers/EventContainer';
-import Profile from '../Containers/ProfileContainer';
-import LoginView from "../Containers/View/LoginView";
-import ForgotPasswordView from "../Containers/View/ForgotPasswordView";
+import Splash from '../Containers/Container/SplashContainer';
+import Home from '../Containers/Container/HomeContainer';
+import ListForm from '../Containers/Container/ListFormContainer';
+import Event from '../Containers/Container/EventContainer';
+import Profile from '../Containers/Container/ProfileContainer';
+import LoginView from "../Containers/Container/LoginContainer";
+import ForgotPasswordView from "../Containers/Container/ForgotPasswordContainer";
+import CreateUser from "../Containers/Container/CreateUserContainer";
 
 
 const getIconTab = (name) => ({ tintColor }) => (
@@ -28,6 +29,9 @@ const Navigation = createStackNavigator(
         },
         ForgotPassword: {
             screen: ForgotPasswordView
+        },
+        CreateUser: {
+            screen: CreateUser
         },
         TabMain: {
             screen: createBottomTabNavigator({
@@ -79,7 +83,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Splash',
+        initialRouteName: 'TabMain',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,

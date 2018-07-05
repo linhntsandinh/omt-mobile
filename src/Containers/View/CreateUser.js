@@ -1,66 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import Icon from "react-native-elements/src/icons/Icon";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-type Props = {};
-export default class SignUp extends Component<Props> {
-    static navigationOptions = ({
-        header: null,
-    });
-
-    constructor() {
-        super();
-        this.state = {username: '', password: '', mail: ''};
-    }
-
-    getUsername(value) {
-        this.setState({
-            username: value
-        })
-    }
-
-    getPassword(value) {
-        this.setState({
-            password: value
-        })
-    }
-
-    getMail(value) {
-        this.setState({
-            mail: value
-        })
-    }
-
+export default class CreateUser extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <View>
-                    <TouchableOpacity style={{alignSelf: 'flex-start', marginBottom: 40}} onPress={() => {this.props.navigation.navigate('LoginScreen')}}>
-                        <Icon
-                            name='ios-arrow-round-back-outline'
-                            type='ionicon'
-                            color='white'
-                            size={35}
-                        />
-                    </TouchableOpacity>
                     <Text style={styles.welcome}>
-                        Forgot password
+                        Create User
                     </Text>
                     <View style={{marginBottom: 40}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-person-outline'
-                                type='ionicon'
-                                color='white'
-                            />
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
@@ -84,34 +36,54 @@ export default class SignUp extends Component<Props> {
                             style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
+                    <View style={{justifyContent: 'center', marginBottom: 40}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-mail-outline'
-                                type='ionicon'
-                                color='white'
-                            />
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
-                                    this.getMail(value)
+                                    this.getPassword(value)
                                 }}
+                                // value={this.state.password}
                                 underlineColorAndroid='transparent'
-                                placeholder='E-mail'
+                                placeholder='Password'
                                 returnKeyType="go"
                                 placeholderTextColor='#60646E'
                                 selectionColor='white'
                                 secureTextEntry={true}
-                                ref={(input) => this.emailInput = input}
+                                ref={(input) => this.passwordInput = input}
                             />
                         </View>
                         <View
                             style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.loginButton}>
+                    <View style={{justifyContent: 'center'}}>
+                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
+                            <TextInput
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                onChangeText={(value) => {
+                                    this.getPassword(value)
+                                }}
+                                // value={this.state.password}
+                                underlineColorAndroid='transparent'
+                                placeholder='Email'
+                                returnKeyType="go"
+                                placeholderTextColor='#60646E'
+                                selectionColor='white'
+                                secureTextEntry={true}
+                                ref={(input) => this.passwordInput = input}
+                            />
+                        </View>
+                        <View
+                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                        </View>
+                    </View>
+                    <TouchableOpacity style={styles.loginButton}
+                                      onPress={() => {
+
+                                      }}>
                         <Text style={styles.loginText}>
-                            Confirm
+                            Next
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -119,7 +91,6 @@ export default class SignUp extends Component<Props> {
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -141,7 +112,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#21242C',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 70,
+        marginTop: 100,
         marginBottom: 10,
         borderRadius: 70,
         elevation: 5

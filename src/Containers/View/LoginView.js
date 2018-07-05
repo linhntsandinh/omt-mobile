@@ -33,15 +33,14 @@ export default class LoginView extends Component<Props> {
     }
 
     testAPI(){
-        fetch('https://chanphom.com/api-c3/user/login', {
+        fetch('http://192.168.1.82:9000/user/login', {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: 'nguyenlinh92',
-                pass: 'linh1212',
+                username: 'linhnt',
+                password: '123456',
             }),
         }).then((response) => response.json())
             .then((res) => {
@@ -123,7 +122,7 @@ export default class LoginView extends Component<Props> {
                             Forgot password?{' '}
                         </Text>
                         <TouchableOpacity onPress={() => {
-                            this.props.navigation.navigate('SignUpScreen');
+                            this.props.navigation.navigate('ForgotPassword');
                             this.usernameInput.clear();
                             this.passwordInput.clear();
                         }}>

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import MessageView from './View/MessageView';
+import SearchView from '../View/SearchView';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageView);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchView);
