@@ -12,8 +12,11 @@ import Event from '../Containers/Container/EventContainer';
 import Profile from '../Containers/Container/ProfileContainer';
 import LoginView from "../Containers/Container/LoginContainer";
 import ForgotPasswordView from "../Containers/Container/ForgotPasswordContainer";
-import CreateUser from "../Containers/Container/CreateUserContainer";
-
+import CreateUserPage1 from "../Containers/Container/CreateUserPage1Container";
+import CreateUserPage2 from "../Containers/Container/CreateUserPage2Container"
+import CreateUserPage3 from "../Containers/Container/CreateUserPage3Container";
+import ResetPassword from "../Containers/Container/ResetPasswordContainer";
+import EditMail from "../Containers/Container/EditMailContainer";
 
 const getIconTab = (name) => ({ tintColor }) => (
     <Icon name={name} color={tintColor} disable />
@@ -30,8 +33,20 @@ const Navigation = createStackNavigator(
         ForgotPassword: {
             screen: ForgotPasswordView
         },
-        CreateUser: {
-            screen: CreateUser
+        CreateUserPage1: {
+            screen: CreateUserPage1
+        },
+        CreateUserPage2: {
+            screen: CreateUserPage2
+        },
+        CreateUserPage3: {
+            screen: CreateUserPage3
+        },
+        ResetPassword: {
+            screen: ResetPassword
+        },
+        EditMail: {
+            screen: EditMail
         },
         TabMain: {
             screen: createBottomTabNavigator({

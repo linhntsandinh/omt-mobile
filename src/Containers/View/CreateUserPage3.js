@@ -1,66 +1,30 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import Icon from "react-native-elements/src/icons/Icon";
+import Icon from "../../Components/Base/Icon";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-type Props = {};
-export default class LoginView extends Component<Props> {
-    static navigationOptions = ({
-        header: null,
-    });
-    constructor() {
-        super();
-        this.state = {username: '', password: ''};
-    }
-
-    getUsername(value) {
-        this.setState({
-            username: value
-        })
-    }
-
-    getPassword(value) {
-        this.setState({
-            password: value
-        })
-    }
-
-    testAPI(){
-        fetch('http://192.168.1.82:9000/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: 'linhnt',
-                password: '123456',
-            }),
-        }).then((response) => response.json())
-            .then((res) => {
-            console.log(res);
-        })
-    }
-
+export default class CreateUserPage3 extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
+                <View style={{width: 320,  marginTop: 20, marginBottom: 20}}>
+                    <Icon
+                        onPress={() =>
+                            this.props.navigation.goBack()
+                        }
+                        name='ios-arrow-round-back-outline'
+                        color='white'
+                        size={35}
+                        style={{alignSelf: 'flex-start'}}
+                    />
+                </View>
+                <View style={{marginTop: 40}}>
                     <Text style={styles.welcome}>
-                        Log In
+                        Create User
                     </Text>
                     <View style={{marginBottom: 40}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-person-outline'
-                                color='white'
-                            />
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
@@ -69,7 +33,7 @@ export default class LoginView extends Component<Props> {
                                 underlineColorAndroid='transparent'
                                 autoCapitalize="none"
                                 autoCorrect={false}
-                                placeholder='Username'
+                                placeholder='Bộ phận'
                                 placeholderTextColor='#60646E'
                                 selectionColor='#60646E'
                                 returnKeyType='next'
@@ -84,12 +48,8 @@ export default class LoginView extends Component<Props> {
                             style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
+                    <View style={{justifyContent: 'center', marginBottom: 40}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name='ios-lock-outline'
-                                color='white'
-                            />
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
@@ -97,7 +57,27 @@ export default class LoginView extends Component<Props> {
                                 }}
                                 // value={this.state.password}
                                 underlineColorAndroid='transparent'
-                                placeholder='Password'
+                                placeholder='Chức vụ'
+                                returnKeyType="go"
+                                placeholderTextColor='#60646E'
+                                selectionColor='white'
+                                secureTextEntry={true}
+                                ref={(input) => this.passwordInput = input}
+                            />
+                        </View>
+                        <View
+                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                        </View>
+                    </View>
+                    <View style={{justifyContent: 'center'}}>
+                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
+                            <TextInput
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                onChangeText={(value) => {
+                                    this.getPassword(value)
+                                }}
+                                underlineColorAndroid='transparent'
+                                placeholder='Ngày tham gia'
                                 returnKeyType="go"
                                 placeholderTextColor='#60646E'
                                 selectionColor='white'
@@ -110,35 +90,22 @@ export default class LoginView extends Component<Props> {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
-                                        onPress={() => this.testAPI()}>
+                                      onPress={() => {
+                                          this.props.navigation.navigate('CreateUserPage2')
+                                      }}>
                         <Text style={styles.loginText}>
-                            Log in
+                            Next
                         </Text>
                     </TouchableOpacity>
-                    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <Text style={{color: 'white', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
-                            Forgot password?{' '}
-                        </Text>
-                        <TouchableOpacity onPress={() => {
-                            this.props.navigation.navigate('ForgotPassword');
-                            this.usernameInput.clear();
-                            this.passwordInput.clear();
-                        }}>
-                            <Text style={{color: '#A3C2CE', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
-                                Click here
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
                 </View>
             </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#434856'
     },

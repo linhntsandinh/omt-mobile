@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'r
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-export default class CreateUser extends Component {
+export default class CreateUserPage1 extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -80,7 +80,7 @@ export default class CreateUser extends Component {
                     </View>
                     <TouchableOpacity style={styles.loginButton}
                                       onPress={() => {
-
+                                          this.props.navigation.navigate('CreateUserPage2')
                                       }}>
                         <Text style={styles.loginText}>
                             Next

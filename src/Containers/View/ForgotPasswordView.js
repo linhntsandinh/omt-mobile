@@ -6,7 +6,7 @@
 
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import Icon from "react-native-elements/src/icons/Icon";
+import Icon from "../../Components/Base/Icon";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -30,21 +30,18 @@ export default class ForgotPasswordView extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <View style={{width: 300, marginTop: 50}}>
-                    <TouchableOpacity style={{alignSelf: 'flex-start'}} onPress={() => {
-                        this.props.navigation.navigate('Login')
-                    }}>
-                        <Icon
-                            name='ios-arrow-round-back-outline'
-                            type='ionicon'
-                            color='white'
-                            size={35}
-                        />
-                    </TouchableOpacity>
+                <View style={{width: 320, marginTop: 50, marginBottom: 100}}>
+                    <Icon
+                        onPress={() => {
+                            this.props.navigation.navigate('Login')
+                        }}
+                        name='ios-arrow-round-back-outline'
+                        color='white'
+                        size={35}
+                    />
                 </View>
                 <View style={{
                     flex: 1,
-                    justifyContent: 'center',
                     alignItems: 'center',
                 }}>
                     <Text style={styles.welcome}>
@@ -54,7 +51,6 @@ export default class ForgotPasswordView extends Component<Props> {
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <Icon
                                 name='ios-mail-outline'
-                                type='ionicon'
                                 color='white'
                             />
                             <TextInput
@@ -77,7 +73,7 @@ export default class ForgotPasswordView extends Component<Props> {
                     </View>
                     <TouchableOpacity style={styles.loginButton}>
                         <Text style={styles.loginText}>
-                            Confirm
+                            Send verification
                         </Text>
                     </TouchableOpacity>
                 </View>

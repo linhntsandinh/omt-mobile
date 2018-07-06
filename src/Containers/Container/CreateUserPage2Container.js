@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import CreateUser from "../View/CreateUser";
+import CreateUserPage2 from "../View/CreateUserPage2";
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUserPage2);

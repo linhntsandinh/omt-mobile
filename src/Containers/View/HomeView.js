@@ -3,7 +3,6 @@ import {BaseStyles} from '../../Theme'
 import React, {Component} from 'react';
 import {Dimensions, FlatList, Image, Keyboard, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {Icons} from "../../Assets";
-import Header from "../../Components/Header";
 import InputText from "../../Components/Base/InputText";
 
 const width = Dimensions.get('window').width;
@@ -23,33 +22,28 @@ export default class Home extends Component {
         } else {
             Keyboard.dismiss();
         }
-        this.props.putNotify("aasdas")
     }
-    _renderHeader = () => {
-        const { isSearch } = this.state;
-        return (
-            <Header
-                left={[
-                    <Icon
-                        style={{marginTop: 10}}
-                        key={'icon'}
-                        name={isSearch ? Icons.back : Icons.search}
-                        onPress={() => this.setState({ isSearch: !isSearch })} />,
-                    <InputText
-                        onChangeText={text => this.setState({ textSearch: text })}
-                        onFocus={() => this.setState({ isSearch: true })}
-                        hint="Search"
-                        key={'haha'}
-                        ref={(com) => { this._inputSearch = com; }} />
-                ]}
-            />
-        );
-    };
     render() {
+        const { isSearch } = this.state;
         return (
 
                     <View style={BaseStyles.screen.mainContainer}>
-                        {this._renderHeader()}
+                        <View style={{flexDirection: 'row'}}>
+                        <Icon
+                            key={'icon'}
+                            name={isSearch ? Icons.back : Icons.search}
+                            onPress={() => this.setState({ isSearch: !isSearch })}
+                            style={{marginTop: 10}}
+                        />
+                        <InputText
+                            onChangeText={text => this.setState({ textSearch: text })}
+                            onFocus={() => this.setState({ isSearch: true })}
+                            hint="Search"
+                            key={'haha'}
+                            ref={(com) => { this._inputSearch = com; }}
+                            iconRemove={true}
+                        />
+                        </View>
                         <TouchableOpacity style={{width: width, height: 200, backgroundColor: 'white'}}>
                             <View style={{margin: 20, justifyContent: 'center', alignItems: 'center',flexDirection: 'row'}}>
                                 <TouchableOpacity>
