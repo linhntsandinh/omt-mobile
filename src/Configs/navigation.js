@@ -98,7 +98,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'TabMain',
+        initialRouteName: 'Login',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,

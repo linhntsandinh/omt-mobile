@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 export default class CreateUserPage1 extends Component {
     render() {
         return (
@@ -27,7 +26,7 @@ export default class CreateUserPage1 extends Component {
                                 returnKeyType='next'
                                 keyboardType="email-address"
                                 onSubmitEditing={() => {
-                                    this.passwordInput.focus()
+
                                 }}
                                 ref={(input) => this.usernameInput = input}
                             />
@@ -41,7 +40,7 @@ export default class CreateUserPage1 extends Component {
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
-                                    this.getPassword(value)
+
                                 }}
                                 // value={this.state.password}
                                 underlineColorAndroid='transparent'
@@ -62,7 +61,7 @@ export default class CreateUserPage1 extends Component {
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
                                 onChangeText={(value) => {
-                                    this.getPassword(value)
+
                                 }}
                                 // value={this.state.password}
                                 underlineColorAndroid='transparent'

@@ -13,4 +13,7 @@ export default {
     clock: 'ios-clock-outline',
     pencil: 'ios-create-outline',
     event: 'ios-color-wand-outline',
+    close: 'ios-close-outline',
+    email: 'ios-mail-outline',
+    lock: 'ios-lock-outline'
 };
