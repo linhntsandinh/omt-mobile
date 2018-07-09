@@ -1,93 +1,102 @@
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
+import {BaseStyles} from "../../Theme";
+import Icons from "../../Assets/Icons";
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 export default class CreateUserPage3 extends Component {
+
+    constructor() {
+        super();
+
+    }
+    state = {
+        isDateTimePickerVisible: false,
+    };
+    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+    _handleDatePicked = (date) => {
+        console.log('A date has been picked: ', date);
+        this._hideDateTimePicker();
+    };
     render() {
         return (
-            <View style={styles.container}>
-                <View style={{width: 320,  marginTop: 20, marginBottom: 20}}>
+            <View style={BaseStyles.screen.mainContainer}>
+                <View style={{width: 320, marginTop: 20, marginBottom: 20}}>
                     <Icon
                         onPress={() =>
                             this.props.navigation.goBack()
                         }
-                        name='ios-arrow-round-back-outline'
-                        color='white'
+                        name={Icons.back_round}
+                        color='#2699FB'
                         size={35}
                         style={{alignSelf: 'flex-start'}}
                     />
                 </View>
-                <View style={{marginTop: 40}}>
-                    <Text style={styles.welcome}>
-                        Create User
+                <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{
+                        fontSize: 30,
+                        textAlign: 'center',
+                        color: '#2699FB',
+                        fontFamily: 'Montserrat-Bold',
+                        marginBottom: 50
+                    }}>
+                        Create an User
                     </Text>
-                    <View style={{marginBottom: 40}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
-                                onChangeText={(value) => {
-                                    this.getUsername(value)
+                    <View style={{marginBottom: 25}}>
+                        <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
+                            <Picker
+                                selectedValue={this.state.language}
+                                mode='dropdown'
+                                style={{
+                                    height: 50,
+                                    width: width - 100,
+                                    color: '#55AFFC',
+
+                                    paddingVertical: 5
                                 }}
-                                underlineColorAndroid='transparent'
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                placeholder='Bộ phận'
-                                placeholderTextColor='#60646E'
-                                selectionColor='#60646E'
-                                returnKeyType='next'
-                                keyboardType="email-address"
-                                onSubmitEditing={() => {
-                                    this.passwordInput.focus()
-                                }}
-                                ref={(input) => this.usernameInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                <Picker.Item label="Leader" value="leader"/>
+                                <Picker.Item label="Chăm sóc khách hàng" value="cskh"/>
+                                <Picker.Item label="Marketing" value="mar"/>
+                                <Picker.Item label="Kỹ thuật" value="dev"/>
+                                <Picker.Item label="Sinh Viên" value="intern"/>
+                                <Picker.Item label="Sáng tạo" value="design"/>
+                                <Picker.Item label="Tài chính" value="finance"/>
+                            </Picker>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 40}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
-                                onChangeText={(value) => {
-                                    this.getPassword(value)
+                    <View style={{marginBottom: 25}}>
+                        <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
+                            <Picker
+                                selectedValue={this.state.language}
+                                mode='dropdown'
+                                style={{
+                                    height: 50,
+                                    width: width - 100,
+                                    color: '#55AFFC',
+
+                                    paddingVertical: 5
                                 }}
-                                // value={this.state.password}
-                                underlineColorAndroid='transparent'
-                                placeholder='Chức vụ'
-                                returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                <Picker.Item label="CEO" value="CEO"/>
+                            </Picker>
                         </View>
                     </View>
                     <View style={{justifyContent: 'center'}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
-                                onChangeText={(value) => {
-                                    this.getPassword(value)
-                                }}
-                                underlineColorAndroid='transparent'
-                                placeholder='Ngày tham gia'
-                                returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
-                        </View>
+                        <TouchableOpacity onPress={this._showDateTimePicker}>
+                            <Text>Show DatePicker</Text>
+                        </TouchableOpacity>
+                        <DateTimePicker
+                            isVisible={this.state.isDateTimePickerVisible}
+                            onConfirm={this._handleDatePicked}
+                            onCancel={this._hideDateTimePicker}
+                        />
                     </View>
                     <TouchableOpacity style={styles.loginButton}
                                       onPress={() => {
@@ -103,12 +112,6 @@ export default class CreateUserPage3 extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#434856'
-    },
     welcome: {
         fontSize: 35,
         alignSelf: 'flex-start',
@@ -118,14 +121,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold'
     },
     loginButton: {
-        width: width - 100,
+        width: width - 200,
         height: 60,
-        backgroundColor: '#21242C',
+        borderColor: '#2699FB',
+        borderWidth: 2,
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100,
+        marginTop: 60,
         marginBottom: 10,
-        borderRadius: 70,
+        borderRadius: 10,
         elevation: 5
     },
     loginText: {
@@ -133,7 +138,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 60,
         marginTop: 60,
-        color: 'white',
+        color: '#2699FB',
         fontFamily: 'Montserrat-Bold'
     },
 });

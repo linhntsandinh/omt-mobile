@@ -1,19 +1,46 @@
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {BaseStyles} from "../../Theme";
 
 const width = Dimensions.get('window').width;
 export default class CreateUserPage1 extends Component {
+    constructor() {
+        super();
+        this.state = {username: '', password: '', email: ''};
+    }
+
+    getUsername(value) {
+        this.setState({
+            username: value
+        })
+    }
+    getEmail(value) {
+        this.setState({
+            email: value
+        })
+    }
+    getPassword(value) {
+        this.setState({
+            password: value
+        })
+    }
     render() {
         return (
-            <View style={styles.container}>
-                <View>
-                    <Text style={styles.welcome}>
-                        Create User
+            <View style={BaseStyles.screen.mainContainer}>
+                <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+                    <Text style={{
+                        fontSize: 30,
+                        textAlign: 'center',
+                        color: '#2699FB',
+                        fontFamily: 'Montserrat-Bold',
+                        marginBottom: 50
+                    }}>
+                        Create an User
                     </Text>
-                    <View style={{marginBottom: 40}}>
+                    <View style={{marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
                                     this.getUsername(value)
                                 }}
@@ -21,60 +48,60 @@ export default class CreateUserPage1 extends Component {
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 placeholder='Username'
-                                placeholderTextColor='#60646E'
-                                selectionColor='#60646E'
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
                                 returnKeyType='next'
                                 keyboardType="email-address"
                                 onSubmitEditing={() => {
-
+                                    this.passwordInput.focus()
                                 }}
                                 ref={(input) => this.usernameInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 40}}>
+                    <View style={{justifyContent: 'center', marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-
+                                    this.getPassword(value)
                                 }}
-                                // value={this.state.password}
                                 underlineColorAndroid='transparent'
                                 placeholder='Password'
                                 returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
                                 secureTextEntry={true}
+                                onSubmitEditing={() => {
+                                    this.emailInput.focus()
+                                }}
                                 ref={(input) => this.passwordInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
                     <View style={{justifyContent: 'center'}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-
+                                    this.getEmail(value)
                                 }}
-                                // value={this.state.password}
                                 underlineColorAndroid='transparent'
                                 placeholder='Email'
                                 returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
+                                ref={(input) => this.emailInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
@@ -91,12 +118,6 @@ export default class CreateUserPage1 extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#434856'
-    },
     welcome: {
         fontSize: 35,
         alignSelf: 'flex-start',
@@ -106,14 +127,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold'
     },
     loginButton: {
-        width: width - 100,
+        width: width - 200,
         height: 60,
-        backgroundColor: '#21242C',
+        borderColor: '#2699FB',
+        borderWidth: 2,
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 100,
         marginBottom: 10,
-        borderRadius: 70,
+        borderRadius: 10,
         elevation: 5
     },
     loginText: {
@@ -121,7 +144,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 60,
         marginTop: 60,
-        color: 'white',
+        color: '#2699FB',
         fontFamily: 'Montserrat-Bold'
     },
 });

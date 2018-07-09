@@ -1,113 +1,149 @@
 import React, {Component} from 'react';
 import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
+import {BaseStyles} from "../../Theme";
+import Icons from "../../Assets/Icons";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 export default class CreateUserPage2 extends Component {
+    constructor() {
+        super();
+        this.state = {name: '', birthday: '', hometown: '', phonenumber: ''};
+    }
+
+    getName(value) {
+        this.setState({
+            name: value
+        })
+    }
+    getBirthday(value) {
+        this.setState({
+            birthday: value
+        })
+    }
+    getHometown(value) {
+        this.setState({
+            hometown: value
+        })
+    }
+    getPhonenumber(value) {
+        this.setState({
+            phonenumber: value
+        })
+    }
     render() {
         return (
-            <View style={styles.container}>
+            <View style={BaseStyles.screen.mainContainer}>
                 <View style={{width: 320, marginTop: 20, marginBottom: 50}}>
                     <Icon
                         onPress={() =>
                             this.props.navigation.goBack()
                         }
-                        name='ios-arrow-round-back-outline'
-                        color='white'
+                        name={Icons.back_round}
+                        color='#2699FB'
                         size={35}
-                        style={{alignSelf: 'flex-start'}}
+                        style={{marginLeft: 25}}
                     />
                 </View>
-                <View>
-                    <Text style={styles.welcome}>
-                        Create User
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <Text style={{
+                        fontSize: 30,
+                        textAlign: 'center',
+                        color: '#2699FB',
+                        fontFamily: 'Montserrat-Bold',
+                        marginBottom: 50
+                    }}>
+                        Create an User
                     </Text>
-                    <View style={{marginBottom: 40}}>
+                    <View style={{marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-                                    this.getUsername(value)
+                                    this.getName(value)
                                 }}
                                 underlineColorAndroid='transparent'
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 placeholder='Họ và tên'
-                                placeholderTextColor='#60646E'
-                                selectionColor='#60646E'
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
                                 returnKeyType='next'
                                 keyboardType="email-address"
                                 onSubmitEditing={() => {
-                                    this.passwordInput.focus()
+                                    this.birthdayInput.focus()
                                 }}
                                 ref={(input) => this.usernameInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 40}}>
+                    <View style={{justifyContent: 'center', marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-                                    this.getPassword(value)
+                                    this.getBirthday(value)
                                 }}
                                 // value={this.state.password}
                                 underlineColorAndroid='transparent'
                                 placeholder='Ngày sinh'
                                 returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
+                                onSubmitEditing={() => {
+                                    this.hometownInput.focus()
+                                }}
+                                ref={(input) => this.birthdayInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 40}}>
+                    <View style={{justifyContent: 'center', marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-                                    this.getPassword(value)
+                                    this.getHometown(value)
                                 }}
                                 // value={this.state.password}
                                 underlineColorAndroid='transparent'
                                 placeholder='Quên quán'
                                 returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
+                                onSubmitEditing={() => {
+                                    this.phonenumberInput.focus()
+                                }}
+                                ref={(input) => this.hometownInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
                     <View style={{justifyContent: 'center'}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: 'white'}}
+                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
                                 onChangeText={(value) => {
-                                    this.getPassword(value)
+                                    this.getPhonenumber(value)
                                 }}
                                 underlineColorAndroid='transparent'
                                 placeholder='Số điện thoại'
                                 returnKeyType="go"
-                                placeholderTextColor='#60646E'
-                                selectionColor='white'
-                                secureTextEntry={true}
-                                ref={(input) => this.passwordInput = input}
+                                placeholderTextColor='#55AFFC'
+                                selectionColor='#55AFFC'
+                                ref={(input) => this.phonenumberInput = input}
                             />
                         </View>
                         <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#BF8D2D', borderBottomWidth: 1}}>
+                            style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
@@ -124,12 +160,6 @@ export default class CreateUserPage2 extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#434856'
-    },
     welcome: {
         fontSize: 35,
         alignSelf: 'flex-start',
@@ -139,14 +169,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold'
     },
     loginButton: {
-        width: width - 100,
+        width: width - 200,
         height: 60,
-        backgroundColor: '#21242C',
+        borderColor: '#2699FB',
+        borderWidth: 2,
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100,
+        marginTop: 60,
         marginBottom: 10,
-        borderRadius: 70,
+        borderRadius: 10,
         elevation: 5
     },
     loginText: {
@@ -154,7 +186,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 60,
         marginTop: 60,
-        color: 'white',
+        color: '#2699FB',
         fontFamily: 'Montserrat-Bold'
     },
 });
