@@ -16,5 +16,6 @@ export default {
     event: 'ios-color-wand-outline',
     close: 'ios-close-outline',
     email: 'ios-mail-outline',
-    lock: 'ios-lock-outline'
+    lock: 'ios-lock-outline',
+    dropdown: 'md-arrow-dropdown'
 };

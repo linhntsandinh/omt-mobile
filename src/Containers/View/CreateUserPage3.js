@@ -3,7 +3,6 @@ import {Dimensions, Picker, StyleSheet, Text, TouchableOpacity, View} from 'reac
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
-import DateTimePicker from 'react-native-modal-datetime-picker';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -11,19 +10,7 @@ export default class CreateUserPage3 extends Component {
 
     constructor() {
         super();
-
     }
-    state = {
-        isDateTimePickerVisible: false,
-    };
-    _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-
-    _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-
-    _handleDatePicked = (date) => {
-        console.log('A date has been picked: ', date);
-        this._hideDateTimePicker();
-    };
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
@@ -35,7 +22,7 @@ export default class CreateUserPage3 extends Component {
                         name={Icons.back_round}
                         color='#2699FB'
                         size={35}
-                        style={{alignSelf: 'flex-start'}}
+                        style={{marginLeft: 25}}
                     />
                 </View>
                 <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
@@ -49,15 +36,16 @@ export default class CreateUserPage3 extends Component {
                         Create an User
                     </Text>
                     <View style={{marginBottom: 25}}>
+                        <Text style={{color: '#55AFFC', marginBottom: 5}}>
+                            Bộ phận
+                        </Text>
                         <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
                             <Picker
                                 selectedValue={this.state.language}
-                                mode='dropdown'
                                 style={{
                                     height: 50,
                                     width: width - 100,
                                     color: '#55AFFC',
-
                                     paddingVertical: 5
                                 }}
                                 onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
@@ -72,15 +60,16 @@ export default class CreateUserPage3 extends Component {
                         </View>
                     </View>
                     <View style={{marginBottom: 25}}>
+                        <Text style={{color: '#55AFFC', marginBottom: 5}}>
+                            Chức vụ
+                        </Text>
                         <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
                             <Picker
                                 selectedValue={this.state.language}
-                                mode='dropdown'
                                 style={{
                                     height: 50,
                                     width: width - 100,
                                     color: '#55AFFC',
-
                                     paddingVertical: 5
                                 }}
                                 onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
@@ -88,22 +77,61 @@ export default class CreateUserPage3 extends Component {
                             </Picker>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
-                        <TouchableOpacity onPress={this._showDateTimePicker}>
-                            <Text>Show DatePicker</Text>
-                        </TouchableOpacity>
-                        <DateTimePicker
-                            isVisible={this.state.isDateTimePickerVisible}
-                            onConfirm={this._handleDatePicked}
-                            onCancel={this._hideDateTimePicker}
-                        />
+                    <View>
+                        <Text style={{color: '#55AFFC', marginBottom: 5}}>
+                            Ngày tham gia
+                        </Text>
+                        <View style={{justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', width: width - 100, height: 50, borderWidth: 1, borderColor: '#CEE8FE'}}>
+                            <Text style={{color: '#55AFFC'}}>
+                                Ngày
+                            </Text>
+                            <Picker
+                                selectedValue={this.state.language}
+                                style={{
+                                    height: 20,
+                                    width: 22,
+                                    color: '#55AFFC',
+                                    // paddingVertical: 5
+                                }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                <Picker.Item label="CEO" value="CEO"/>
+                            </Picker>
+                            <Text style={{color: '#55AFFC'}}>
+                                Tháng
+                            </Text>
+                            <Picker
+                                selectedValue={this.state.language}
+                                style={{
+                                    height: 20,
+                                    width: 22,
+                                    color: '#55AFFC',
+                                    // paddingVertical: 5
+                                }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                <Picker.Item label="CEO" value="CEO"/>
+                            </Picker>
+                            <Text style={{color: '#55AFFC'}}>
+                                Năm
+                            </Text>
+                            <Picker
+                                selectedValue={this.state.language}
+                                style={{
+                                    height: 20,
+                                    width: 22,
+                                    color: '#55AFFC',
+                                    // paddingVertical: 5
+                                }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                                <Picker.Item label="CEO" value="CEO"/>
+                            </Picker>
+                        </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
                                       onPress={() => {
                                           this.props.navigation.navigate('CreateUserPage2')
                                       }}>
                         <Text style={styles.loginText}>
-                            Next
+                            Create
                         </Text>
                     </TouchableOpacity>
                 </View>
