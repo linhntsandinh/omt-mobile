@@ -3,6 +3,7 @@ import {Dimensions, Picker, StyleSheet, Text, TouchableOpacity, View} from 'reac
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
+import Consts from "../../Configs/Consts";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -10,7 +11,15 @@ export default class CreateUserPage3 extends Component {
 
     constructor() {
         super();
+        this.state = {
+            team: null,
+            roles: null,
+            day: 27,
+            month: 12,
+            year: 2013
+        }
     }
+
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
@@ -40,22 +49,22 @@ export default class CreateUserPage3 extends Component {
                             Bộ phận
                         </Text>
                         <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
+
                             <Picker
-                                selectedValue={this.state.language}
+                                selectedValue={this.state.team}
                                 style={{
                                     height: 50,
                                     width: width - 100,
                                     color: '#55AFFC',
                                     paddingVertical: 5
                                 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="Leader" value="leader"/>
-                                <Picker.Item label="Chăm sóc khách hàng" value="cskh"/>
-                                <Picker.Item label="Marketing" value="mar"/>
-                                <Picker.Item label="Kỹ thuật" value="dev"/>
-                                <Picker.Item label="Sinh Viên" value="intern"/>
-                                <Picker.Item label="Sáng tạo" value="design"/>
-                                <Picker.Item label="Tài chính" value="finance"/>
+                                onValueChange={(itemValue, itemIndex) => this.setState({team: itemValue})}>
+                                {
+                                    Object.keys(Consts.team).map((value, index) => {
+                                        return <Picker.Item key={index} label={Consts.team[value]}
+                                                            value={Consts.team[value]}/>
+                                    })
+                                }
                             </Picker>
                         </View>
                     </View>
@@ -63,66 +72,87 @@ export default class CreateUserPage3 extends Component {
                         <Text style={{color: '#55AFFC', marginBottom: 5}}>
                             Chức vụ
                         </Text>
-                        <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
-                            <Picker
-                                selectedValue={this.state.language}
-                                style={{
-                                    height: 50,
-                                    width: width - 100,
-                                    color: '#55AFFC',
-                                    paddingVertical: 5
-                                }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="CEO" value="CEO"/>
-                            </Picker>
-                        </View>
+                            <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
+                                <Picker
+                                    selectedValue={this.state.roles}
+                                    style={{
+                                        height: 50,
+                                        width: width - 100,
+                                        color: '#55AFFC',
+                                        paddingVertical: 5
+                                    }}
+                                    onValueChange={(itemValue, itemIndex) => this.setState({roles: itemValue})}>
+                                    {Object.keys(Consts.roles).map((value, index) => {
+                                        return <Picker.Item key={index} label={Consts.roles[value]}
+                                                            value={Consts.roles[value]}/>
+                                    })}
+                                </Picker>
+                            </View>
                     </View>
                     <View>
                         <Text style={{color: '#55AFFC', marginBottom: 5}}>
                             Ngày tham gia
                         </Text>
-                        <View style={{justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row', width: width - 100, height: 50, borderWidth: 1, borderColor: '#CEE8FE'}}>
+                        <View style={{
+                            justifyContent: 'space-around',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            width: width - 100,
+                            height: 50,
+                            borderWidth: 1,
+                            borderColor: '#CEE8FE'
+                        }}>
                             <Text style={{color: '#55AFFC'}}>
-                                Ngày
+                                {this.state.day}
                             </Text>
                             <Picker
-                                selectedValue={this.state.language}
+                                selectedValue={this.state.day}
                                 style={{
                                     height: 20,
                                     width: 22,
                                     color: '#55AFFC',
-                                    // paddingVertical: 5
                                 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="CEO" value="CEO"/>
+                                onValueChange={(itemValue, itemIndex) => this.setState({day: itemValue})}>
+                                {Object.keys(Consts.day).map((value, index) => {
+                                    return <Picker.Item key={index} label={Consts.day[value]}
+                                                        value={Consts.day[value]}/>
+                                })}
                             </Picker>
                             <Text style={{color: '#55AFFC'}}>
-                                Tháng
+                                {this.state.month}
                             </Text>
                             <Picker
-                                selectedValue={this.state.language}
+                                selectedValue={this.state.month}
                                 style={{
                                     height: 20,
                                     width: 22,
                                     color: '#55AFFC',
                                     // paddingVertical: 5
                                 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="CEO" value="CEO"/>
+                                onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue})}>
+                                {Object.keys(Consts.month).map((value, index) => {
+                                    return <Picker.Item key={index} label={Consts.month[value]}
+                                                        value={Consts.month[value]}/>
+                                })}
                             </Picker>
                             <Text style={{color: '#55AFFC'}}>
-                                Năm
+                                {this.state.year}
                             </Text>
                             <Picker
-                                selectedValue={this.state.language}
+                                selectedValue={this.state.year}
                                 style={{
                                     height: 20,
                                     width: 22,
                                     color: '#55AFFC',
-                                    // paddingVertical: 5
                                 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                                <Picker.Item label="CEO" value="CEO"/>
+                                onValueChange={(itemValue, itemIndex) => {
+                                    this.setState({year: itemValue});
+                                }}
+                            >
+                                {Object.keys(Consts.year).map((value, index) => {
+                                    return <Picker.Item key={index} label={Consts.year[value]}
+                                                        value={Consts.year[value]}/>
+                                })}
                             </Picker>
                         </View>
                     </View>
