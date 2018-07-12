@@ -7,7 +7,7 @@ export default {
         mainContainer: {
             flex: 1,
             backgroundColor: Colors.transparent,
-            // paddingTop: Metrics.statusBarHeight
+            paddingTop: Metrics.statusBarHeight
         },
         container: {
             flex: 1,

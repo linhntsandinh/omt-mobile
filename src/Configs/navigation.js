@@ -54,7 +54,7 @@ const Navigation = createStackNavigator(
                     screen: Home,
                     navigationOptions: {
                         tabBarLabel: 'TimeKeeping',
-                        tabBarIcon: getIconTab(Icons.clock)
+                        tabBarIcon: getIconTab(Icons.calendar)
                     }
                 },
                 ListForm: {
@@ -82,13 +82,13 @@ const Navigation = createStackNavigator(
                     swipeEnabled: false,
                     lazy: true,
                     tabBarOptions: {
-                        activeTintColor: 'black',
-                        inactiveTintColor: Colors.border,
+                        activeTintColor: 'white',
+                        inactiveTintColor: Colors.active,
                         showLabel: false,
                         showIcon: true,
                         style: {
                             ...BaseStyles.disable_shadow,
-                            backgroundColor: Colors.white,
+                            backgroundColor: Colors.footer,
                             height: Metrics.navBarHeight
                         }
                     },
@@ -98,7 +98,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'CreateUserPage1',
+        initialRouteName: 'TabMain',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,

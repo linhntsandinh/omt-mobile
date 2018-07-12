@@ -22,7 +22,7 @@ export default class Search extends Component {
                     <Icon
                         key={'icon'}
                         name={isSearch ? Icons.back : Icons.search}
-                        onPress={() => this.setState({ isSearch: !isSearch })} />,
+                        />,
                     <InputText
                         onChangeText={text => this.setState({ textSearch: text })}
                         onFocus={() => this.setState({ isSearch: true })}

@@ -28,64 +28,116 @@ export default class Home extends Component {
     render() {
         const {isSearch} = this.state;
         return (
-
             <View style={BaseStyles.screen.mainContainer}>
-                <View style={{flexDirection: 'row'}}>
-                    <Icon
-                        key={'icon'}
-                        name={isSearch ? Icons.back : Icons.search}
-                        onPress={() => this.setState({isSearch: !isSearch})}
-                        style={{marginTop: 10, marginLeft: 5}}
-                    />
-                    <InputText
-                        onChangeText={text => this.setState({textSearch: text})}
-                        onFocus={() => this.setState({isSearch: true})}
-                        hint="Search"
-                        key={'haha'}
-                        ref={(com) => {
-                            this._inputSearch = com;
-                        }}
-                        iconRemove={true}
-                    />
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#E1F2FF',
+                    height: 80,
+
+                }}>
+                    <View style={{
+                        flexDirection: 'row',
+                        backgroundColor: 'white',
+                        width: width - 50,
+                        borderRadius: 50,
+                        borderWidth: 1.5,
+                        borderColor: '#53B2FF'
+                    }}>
+                        <Icon
+                            key={'icon'}
+                            name={isSearch ? Icons.back : Icons.search}
+                            onPress={() => this.setState({isSearch: !isSearch})}
+                            style={{marginTop: 10, marginLeft: 5}}
+                            color='#53B2FF'
+                        />
+                        <InputText
+                            onChangeText={text => this.setState({textSearch: text})}
+                            onFocus={() => this.setState({isSearch: true})}
+                            hint="Search"
+                            key={'haha'}
+                            ref={(com) => {
+                                this._inputSearch = com;
+                            }}
+                            iconRemove={true}
+                            color='#CDE7FD'
+                        />
+                    </View>
                 </View>
-                <TouchableOpacity style={{width: width, height: 200, backgroundColor: 'white'}}>
+                <View
+                    style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 5}}>
+                </View>
+                <TouchableOpacity
+                    style={{width: width - 20, height: 150, backgroundColor: '#E1F2FF', alignSelf: 'center'}}>
                     <View style={{margin: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
                         <TouchableOpacity>
                             <Image source={require('../../Assets/Image/wallhaven-367110.png')}
                                    style={{width: 100, height: 100, borderRadius: 70}}/>
                         </TouchableOpacity>
-                        <Text style={styles.text}
-                        >
-                            Thông tin chấm công
-                        </Text>
-                    </View>
-                    <TouchableOpacity style={{width: width, height: 60, backgroundColor: '#059876'}}>
-                        <Text style={styles.text}
-                        >
-                            Check In
-                        </Text>
-                    </TouchableOpacity>
-                </TouchableOpacity>
-                <FlatList
-                    data={[{key: 'a'}]}
-                    renderItem={({item}) =>
-                        <View
-                            style={{margin: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                            <TouchableOpacity>
-                                <Image source={require('../../Assets/Image/wallhaven-367110.png')}
-                                       style={{width: 70, height: 70, borderRadius: 50}}/>
-                            </TouchableOpacity>
+                        <View>
                             <Text style={{
-                                fontSize: 17,
+                                fontSize: 20,
                                 textAlign: 'center',
-                                color: '#3D5494',
+                                color: '#2799FB',
                                 marginTop: 10,
                                 fontFamily: 'Montserrat-Bold',
-                                marginLeft: 15
+                                marginLeft: 15,
+                                marginBottom: 10
                             }}
                             >
-                                Thông tin chấm công
+                                Nguyễn Xuân Trường
                             </Text>
+                            <TouchableOpacity style={{
+                                width: width - 185,
+                                height: 55,
+                                backgroundColor: '#39B774',
+                                borderRadius: 70,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginLeft: 15,
+                                borderWidth: 2,
+                                borderColor: 'white'
+                            }}>
+                                <Text style={styles.text}
+                                >
+                                    CHECK IN
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                </TouchableOpacity>
+                <FlatList
+                    data={[{key: 'a'}, {key: 'b'}, {key: 'b'}, {key: 'b'}, {key: 'b'}]}
+                    renderItem={({item}) =>
+                        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                            <View
+                                style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 5}}>
+                            </View>
+                            <View
+                                style={{
+                                    width: width - 20,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                    backgroundColor: '#E1F2FF',
+                                }}>
+                                <TouchableOpacity>
+                                    <Image source={require('../../Assets/Image/wallhaven-367110.png')}
+                                           style={{width: 100, height: 100, borderRadius: 70}}/>
+                                </TouchableOpacity>
+                                <Text style={{
+                                    fontSize: 20,
+                                    textAlign: 'center',
+                                    color: '#3D5494',
+                                    marginTop: 10,
+                                    fontFamily: 'Montserrat-Bold',
+                                    marginLeft: 15
+                                }}
+                                >
+                                    Thông tin chấm công
+                                </Text>
+                            </View>
                         </View>
                     }
                 />
@@ -103,9 +155,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         textAlign: 'center',
-        color: '#3D5494',
-        marginTop: 10,
+        color: 'white',
         fontFamily: 'Montserrat-Bold',
-        marginLeft: 15
     }
 });

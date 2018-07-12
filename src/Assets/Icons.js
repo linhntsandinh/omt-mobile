@@ -17,5 +17,7 @@ export default {
     close: 'ios-close-outline',
     email: 'ios-mail-outline',
     lock: 'ios-lock-outline',
-    dropdown: 'md-arrow-dropdown'
+    dropdown: 'md-arrow-dropdown',
+    calendar: 'ios-calendar-outline',
+    pencil_bold: 'md-create'
 };

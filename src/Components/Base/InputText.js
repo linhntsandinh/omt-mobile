@@ -173,21 +173,21 @@ export default class InputText extends Component {
     /**
      * {string} @return 'curent text '
      */
-    // focus = () => {
-    //     this.refs._input.focus();
-    // }
+    focus = () => {
+        this.refs._input.focus();
+    }
 
     text = () => {
         return this.state.value;
     };
 
-    // removeText = () => {
-    //     this._handRemoveAllText();
-    // }
-    //
-    // showError = (error) => {
-    //     this.setState({ error: error });
-    // }
+    removeText = () => {
+        this._handRemoveAllText();
+    }
+
+    showError = (error) => {
+        this.setState({ error: error });
+    }
 }
 
 const styles = StyleSheet.create({
