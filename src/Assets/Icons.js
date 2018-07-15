@@ -19,5 +19,6 @@ export default {
     lock: 'ios-lock-outline',
     dropdown: 'md-arrow-dropdown',
     calendar: 'ios-calendar-outline',
-    pencil_bold: 'md-create'
+    pencil_bold: 'md-create',
+    build_bold: 'md-build'
 };

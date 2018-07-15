@@ -10,6 +10,7 @@ import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import {Header} from "react-native-elements";
 import Icons from "../../Assets/Icons";
+import Popup from "../../Components/Base/Popup";
 
 
 const width = Dimensions.get('window').width;
@@ -188,17 +189,16 @@ export default class LoginView extends Component<Props> {
                         <Text style={{color: '#BCBCBC', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
                             Forgot password?{' '}
                         </Text>
-                        <TouchableOpacity onPress={() => {
-                            this.props.navigation.navigate('ForgotPassword');
-                            this.usernameInput.clear();
-                            this.passwordInput.clear();
-                        }}>
+                        <TouchableOpacity onPress={() => this.popup.show()}>
+
                             <Text style={{color: '#A3C2CE', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
                                 Click here
                             </Text>
+
                         </TouchableOpacity>
                     </View>
                 </View>
+                <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold}/>
             </View>
         );
     }
