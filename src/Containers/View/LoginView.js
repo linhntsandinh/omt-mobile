@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import {Header} from "react-native-elements";
@@ -60,7 +60,12 @@ export default class LoginView extends Component<Props> {
 
     render() {
         return (
+
             <View style={BaseStyles.screen.mainContainer}>
+                <StatusBar
+                    backgroundColor='#026dc9'
+                    barStyle='light-content'
+                />
                 <Header
                     centerComponent={
                         <View style={{height: 120, width: 300, justifyContent: 'center', alignItems: 'center'}}>
@@ -198,7 +203,7 @@ export default class LoginView extends Component<Props> {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold}/>
+                <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold} buttonTitle='Send vertification'/>
             </View>
         );
     }

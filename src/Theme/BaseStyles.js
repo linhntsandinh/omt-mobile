@@ -1,13 +1,34 @@
 import Metrics from './Metrics'
 import Colors from './Colors'
 import Fonts from './Fonts'
+import {Dimensions} from "react-native";
 
+const width = Dimensions.get('window').width;
 export default {
     screen: {
         mainContainer: {
             flex: 1,
             backgroundColor: Colors.transparent,
             paddingTop: Metrics.statusBarHeight
+        },
+        touchableButton: {
+            width: width - 200,
+            height: 60,
+            borderColor: '#2699FB',
+            borderWidth: 2,
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 60,
+            marginBottom: 10,
+            borderRadius: 10,
+            elevation: 5
+        },
+        touchableButtonText: {
+            fontSize: 20,
+            textAlign: 'center',
+            color: '#2699FB',
+            fontFamily: 'Montserrat-Bold'
         },
         container: {
             flex: 1,
@@ -48,7 +69,9 @@ export default {
             ...Fonts.style.h2,
             fontSize: 14,
             color: Colors.text
-        }
+        },
+
+
     },
     disable_shadow: {
         shadowOffset: {width: 0, height: 0},

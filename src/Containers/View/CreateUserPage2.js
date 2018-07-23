@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
@@ -146,11 +146,11 @@ export default class CreateUserPage2 extends Component {
                             style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.loginButton}
+                    <TouchableOpacity style={BaseStyles.screen.touchableButton}
                                       onPress={() => {
                                           this.props.navigation.navigate('CreateUserPage3')
                                       }}>
-                        <Text style={styles.loginText}>
+                        <Text style={BaseStyles.screen.touchableButtonText}>
                             Next
                         </Text>
                     </TouchableOpacity>
@@ -159,34 +159,4 @@ export default class CreateUserPage2 extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    welcome: {
-        fontSize: 35,
-        alignSelf: 'flex-start',
-        textAlign: 'center',
-        marginBottom: 40,
-        color: 'white',
-        fontFamily: 'Montserrat-Bold'
-    },
-    loginButton: {
-        width: width - 200,
-        height: 60,
-        borderColor: '#2699FB',
-        borderWidth: 2,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 60,
-        marginBottom: 10,
-        borderRadius: 10,
-        elevation: 5
-    },
-    loginText: {
-        fontSize: 20,
-        textAlign: 'center',
-        marginBottom: 60,
-        marginTop: 60,
-        color: '#2699FB',
-        fontFamily: 'Montserrat-Bold'
-    },
-});
+

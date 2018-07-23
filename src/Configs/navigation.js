@@ -11,11 +11,9 @@ import ListForm from '../Containers/Container/ListFormContainer';
 import Event from '../Containers/Container/EventContainer';
 import Profile from '../Containers/Container/ProfileContainer';
 import LoginView from "../Containers/Container/LoginContainer";
-import ForgotPasswordView from "../Containers/Container/ForgotPasswordContainer";
 import CreateUserPage1 from "../Containers/Container/CreateUserPage1Container";
 import CreateUserPage2 from "../Containers/Container/CreateUserPage2Container"
 import CreateUserPage3 from "../Containers/Container/CreateUserPage3Container";
-import ResetPassword from "../Containers/Container/ResetPasswordContainer";
 import EditMail from "../Containers/Container/EditMailContainer";
 
 const getIconTab = (name) => ({ tintColor }) => (
@@ -30,9 +28,6 @@ const Navigation = createStackNavigator(
         Login: {
             screen: LoginView
         },
-        ForgotPassword: {
-            screen: ForgotPasswordView
-        },
         CreateUserPage1: {
             screen: CreateUserPage1
         },
@@ -41,9 +36,6 @@ const Navigation = createStackNavigator(
         },
         CreateUserPage3: {
             screen: CreateUserPage3
-        },
-        ResetPassword: {
-            screen: ResetPassword
         },
         EditMail: {
             screen: EditMail

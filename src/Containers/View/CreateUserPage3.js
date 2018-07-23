@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, Picker, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Picker, Text, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
@@ -156,11 +156,11 @@ export default class CreateUserPage3 extends Component {
                             </Picker>
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.loginButton}
+                    <TouchableOpacity style={BaseStyles.screen.touchableButton}
                                       onPress={() => {
                                           this.props.navigation.navigate('CreateUserPage2')
                                       }}>
-                        <Text style={styles.loginText}>
+                        <Text style={BaseStyles.screen.touchableButtonText}>
                             Create
                         </Text>
                     </TouchableOpacity>
@@ -169,34 +169,4 @@ export default class CreateUserPage3 extends Component {
         );
     }
 }
-const styles = StyleSheet.create({
-    welcome: {
-        fontSize: 35,
-        alignSelf: 'flex-start',
-        textAlign: 'center',
-        marginBottom: 60,
-        color: 'white',
-        fontFamily: 'Montserrat-Bold'
-    },
-    loginButton: {
-        width: width - 200,
-        height: 60,
-        borderColor: '#2699FB',
-        borderWidth: 2,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 60,
-        marginBottom: 10,
-        borderRadius: 10,
-        elevation: 5
-    },
-    loginText: {
-        fontSize: 20,
-        textAlign: 'center',
-        marginBottom: 60,
-        marginTop: 60,
-        color: '#2699FB',
-        fontFamily: 'Montserrat-Bold'
-    },
-});
+
