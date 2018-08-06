@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ListFormView from '../View/ListFormView';
+import FormDetailView from '../View/FormDetailView';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListFormView);
+export default connect(mapStateToProps, mapDispatchToProps)(FormDetailView);

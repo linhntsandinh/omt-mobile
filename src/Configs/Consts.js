@@ -1,3 +1,12 @@
+import {Dimensions} from "react-native";
+
+const guidelineBaseWidth = 1080;
+const guidelineBaseHeight = 1920;
+const scale = size => width / guidelineBaseWidth * size;
+const verticalScale = size => height / guidelineBaseHeight * size;
+export const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
+export const width = Dimensions.get('window').width;
+export const height = Dimensions.get('window').height;
 export default  {
     client_id: '',
     client_secret: '',
@@ -79,5 +88,10 @@ export default  {
         2016: '2016',
         2017: '2017',
         2018: '2018',
-    }
+    },
+    employee_list: {
+        NguyenTheLinh: 'Nguyễn Thế Linh',
+        BuiVietThanh: 'Bùi Việt Thành'
+    },
+    form_test: [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}, {key: 'g'}]
 };

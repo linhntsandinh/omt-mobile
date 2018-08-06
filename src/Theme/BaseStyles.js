@@ -1,9 +1,8 @@
 import Metrics from './Metrics'
 import Colors from './Colors'
 import Fonts from './Fonts'
-import {Dimensions} from "react-native";
+import {width} from "../Configs/Consts"
 
-const width = Dimensions.get('window').width;
 export default {
     screen: {
         mainContainer: {

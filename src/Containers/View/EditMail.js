@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import {Icon, View} from '../../Components'
-import {Dimensions, Text, TextInput} from "react-native";
+import {Text, TextInput} from "react-native";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
+import {width} from "../../Configs/Consts"
 
-
-const width = Dimensions.get('window').width;
-// const height = Dimensions.get('window').height;
 export default class EditMail extends Component {
     render() {
         return (

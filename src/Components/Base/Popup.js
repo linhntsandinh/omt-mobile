@@ -4,9 +4,9 @@ import PopupDialog, {SlideAnimation} from 'react-native-popup-dialog';
 import Text from "../../Components/Base/Text";
 import Icon from "../../Components/Base/Icon";
 import PropTypes from 'prop-types';
-import {Dimensions, TextInput, TouchableOpacity} from "react-native";
+import {TextInput, TouchableOpacity} from "react-native";
+import {width} from "../../Configs/Consts"
 
-const width = Dimensions.get('window').width;
 const slideAnimation = new SlideAnimation({
     slideFrom: 'bottom',
 });
@@ -17,25 +17,25 @@ export default class Popup extends Component {
     constructor() {
         super();
         this.state = {
-            oldEmail: '',
-            newEmail: ''
+            firstField: '',
+            secondField: ''
         }
     }
 
-    getOldPawssword(value) {
+    getFirstField(value) {
         this.setState({
-            oldEmail: value
+            firstField: value
         })
     }
 
-    getNewPassword(value) {
+    getSecondField(value) {
         this.setState({
-            newEmail: value
+            secondField: value
         })
     }
 
     render() {
-        const {title, iconName, buttonTitle} = this.props;
+        const {title, iconName, buttonTitle, placeHolder, placeHolder2} = this.props;
         return (
             <PopupDialog
                 ref={(popupDialog) => {
@@ -69,7 +69,7 @@ export default class Popup extends Component {
                 <View style={{flex: 1, justifyContent: 'center', margin: 25}}>
                     <View style={{}}>
                         <Text style={{marginLeft: 15}} fontSize={10} color='#A4A4A4' bold={true}>
-                            Mật khẩu cũ:
+                            {placeHolder}
                         </Text>
                         <TextInput
                             style={{
@@ -83,12 +83,12 @@ export default class Popup extends Component {
                                 height: 40
                             }}
                             onChangeText={(value) => {
-                                this.getOldPawssword(value)
+                                this.getFirstField(value)
                             }}
                             underlineColorAndroid='transparent'
                             autoCapitalize="none"
                             autoCorrect={false}
-                            placeholder='Old password'
+                            placeholder={placeHolder}
                             placeholderTextColor='#55AFFC'
                             selectionColor='#55AFFC'
                             returnKeyType='next'
@@ -101,7 +101,7 @@ export default class Popup extends Component {
                     </View>
                     <View style={{marginTop: 10}}>
                         <Text style={{marginLeft: 15}} fontSize={10} color='#A4A4A4' bold={true}>
-                            Mật khẩu mới:
+                            {placeHolder2}
                         </Text>
                         <TextInput
                             style={{
@@ -114,12 +114,12 @@ export default class Popup extends Component {
                                 height: 40
                             }}
                             onChangeText={(value) => {
-                                this.getNewPassword(value)
+                                this.getSecondField(value)
                             }}
                             underlineColorAndroid='transparent'
                             autoCapitalize="none"
                             autoCorrect={false}
-                            placeholder='New password'
+                            placeholder={placeHolder2}
                             placeholderTextColor='#55AFFC'
                             selectionColor='#55AFFC'
                             returnKeyType='next'
@@ -166,4 +166,6 @@ Popup.propTypes = {
     title: PropTypes.string,
     iconName: PropTypes.string,
     buttonTitle: PropTypes.string,
+    placeHolder: PropTypes.string,
+    placeHolder2: PropTypes.string
 };

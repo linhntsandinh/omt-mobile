@@ -15,6 +15,7 @@ import CreateUserPage1 from "../Containers/Container/CreateUserPage1Container";
 import CreateUserPage2 from "../Containers/Container/CreateUserPage2Container"
 import CreateUserPage3 from "../Containers/Container/CreateUserPage3Container";
 import EditMail from "../Containers/Container/EditMailContainer";
+import FormDetailView from "../Containers/Container/FormDetailContainer";
 
 const getIconTab = (name) => ({ tintColor }) => (
     <Icon name={name} color={tintColor} disable />
@@ -39,6 +40,9 @@ const Navigation = createStackNavigator(
         },
         EditMail: {
             screen: EditMail
+        },
+        FormDetailView: {
+            screen: FormDetailView
         },
         TabMain: {
             screen: createBottomTabNavigator({

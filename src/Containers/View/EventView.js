@@ -12,15 +12,6 @@ export default class EventView extends Component {
             <View
                 style={BaseStyles.screen.mainContainer}
             >
-                {/*<Button*/}
-                    {/*// ref={(comp) => this.isShow = comp}*/}
-                    {/*title="Show Dialog"*/}
-                    {/*onPress={() => {*/}
-                        {/*this.setState({a:true});*/}
-                        {/*this.popup.show();*/}
-                    {/*}}*/}
-                {/*/>*/}
-                {/*<Popup ref={ref => (this.popup = ref)}  name={this.state.a}/>*/}
             </View>
         );
     }

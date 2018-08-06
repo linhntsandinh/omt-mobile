@@ -5,15 +5,13 @@
  */
 
 import React, {Component} from 'react';
-import {Dimensions, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import {Header} from "react-native-elements";
 import Icons from "../../Assets/Icons";
 import Popup from "../../Components/Base/Popup";
-
-
-const width = Dimensions.get('window').width;
+import {width} from "../../Configs/Consts"
 // const height = Dimensions.get('window').height;
 type Props = {};
 export default class LoginView extends Component<Props> {
@@ -31,11 +29,13 @@ export default class LoginView extends Component<Props> {
             username: value
         })
     }
+
     getEmail(value) {
         this.setState({
             email: value
         })
     }
+
     getPassword(value) {
         this.setState({
             password: value
@@ -88,8 +88,8 @@ export default class LoginView extends Component<Props> {
                         </View>
                     }
                     backgroundColor='#2699FB'
-                    innerContainerStyles={{ justifyContent: 'center' }}
-                    outerContainerStyles={{ height: 150 }}
+                    innerContainerStyles={{justifyContent: 'center'}}
+                    outerContainerStyles={{height: 150}}
                 />
                 <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{
@@ -185,7 +185,9 @@ export default class LoginView extends Component<Props> {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
-                                      onPress={() => this.testAPI()}>
+                                      onPress={() => {
+                                          this.props.navigation.navigate('TabMain');
+                                      }}>
                         <Text style={styles.loginText}>
                             LOG IN
                         </Text>
@@ -195,7 +197,6 @@ export default class LoginView extends Component<Props> {
                             Forgot password?{' '}
                         </Text>
                         <TouchableOpacity onPress={() => this.popup.show()}>
-
                             <Text style={{color: '#A3C2CE', fontFamily: 'Montserrat-SemiBold', fontSize: 15}}>
                                 Click here
                             </Text>
@@ -203,7 +204,8 @@ export default class LoginView extends Component<Props> {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold} buttonTitle='Send vertification'/>
+                <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold}
+                       buttonTitle='Send vertification' placeHolder2='Mật khẩu mới' placeHolder='Mật khẩu cũ'/>
             </View>
         );
     }

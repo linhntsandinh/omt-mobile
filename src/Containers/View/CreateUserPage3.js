@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import {Dimensions, Picker, Text, TouchableOpacity, View} from 'react-native';
+import {Picker, Text, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
-import Consts from "../../Configs/Consts";
+import Consts, {width} from "../../Configs/Consts";
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 export default class CreateUserPage3 extends Component {
 
     constructor() {

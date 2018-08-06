@@ -20,5 +20,9 @@ export default {
     dropdown: 'md-arrow-dropdown',
     calendar: 'ios-calendar-outline',
     pencil_bold: 'md-create',
-    build_bold: 'md-build'
+    build_bold: 'md-build',
+    trash: 'md-trash',
+    calendar_bold: 'md-calendar',
+    add_bold: 'md-add',
+    arrow_down: 'ios-arrow-down-outline'
 };
