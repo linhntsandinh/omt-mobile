@@ -43,19 +43,19 @@ export default class LoginView extends Component<Props> {
     }
 
     testAPI() {
-        fetch('http://192.168.1.82:9000/user/login', {
+        fetch('http://192.168.1.108:9000/absence/load', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: 'linhnt',
-                password: '123456',
+                username: 'c',
+                password: 'c',
             }),
         }).then((response) => response.json())
             .then((res) => {
                 console.log(res);
-            })
+            }).catch(error => {console.log(error)})
     }
 
     render() {
@@ -187,6 +187,7 @@ export default class LoginView extends Component<Props> {
                     <TouchableOpacity style={styles.loginButton}
                                       onPress={() => {
                                           this.props.navigation.navigate('TabMain');
+                                          this.testAPI();
                                       }}>
                         <Text style={styles.loginText}>
                             LOG IN

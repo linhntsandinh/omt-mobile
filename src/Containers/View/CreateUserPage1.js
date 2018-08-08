@@ -14,16 +14,19 @@ export default class CreateUserPage1 extends Component {
             username: value
         })
     }
+
     getEmail(value) {
         this.setState({
             email: value
         })
     }
+
     getPassword(value) {
         this.setState({
             password: value
         })
     }
+
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
@@ -104,6 +107,24 @@ export default class CreateUserPage1 extends Component {
                             style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
+                    <TouchableOpacity style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        borderColor: '#CEE8FE',
+                        borderWidth: 1,
+                        marginTop: 30,
+                        paddingVertical: 15,
+                        paddingHorizontal: 70
+                    }}>
+
+                        <Text style={{
+                            fontSize: 20,
+                            textAlign: 'center',
+                            color: '#2699FB',
+                        }}>
+                            + Chọn ảnh đại diện
+                        </Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={BaseStyles.screen.touchableButton}
                                       onPress={() => {
                                           this.props.navigation.navigate('CreateUserPage2')

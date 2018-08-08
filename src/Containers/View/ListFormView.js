@@ -174,7 +174,7 @@ export default class ListFormView extends Component {
                     style={{
                         backgroundColor: '#EBF6FF',
                         width: '88%',
-                        height: '76%',
+                        height: '74%',
                         alignSelf: 'center',
 
                     }}>
@@ -264,7 +264,7 @@ export default class ListFormView extends Component {
                         renderItem={({item, index}) =>
                             <View style={{
                                 width: '42%',
-                                height: height * 31 / 100,
+                                height: height * 30 / 100,
                                 margin: 10,
                             }}
                             >
@@ -364,7 +364,7 @@ export default class ListFormView extends Component {
                         height: 1,
                         borderColor: '#F1F1F1',
                         borderWidth: 1,
-                        marginTop: 6,
+                        marginTop: 10,
                     }}>
                 </View>
             </View>

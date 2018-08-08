@@ -13,7 +13,7 @@ export default class Home extends Component {
         this.state = {
             isSearch: false,
             textSearch: '',
-            isDetailShow: false
+            isDetailShow: null
         };
     }
 
@@ -127,7 +127,7 @@ export default class Home extends Component {
                                     }}>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={() => this.setState({isDetailShow: true})}
+                                    onPress={() => this.setState({isDetailShow: index})}
                                     style={{
                                         width: width - 20,
                                         justifyContent: 'center',
@@ -152,47 +152,57 @@ export default class Home extends Component {
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                            {isDetailShow ?
+                            {(isDetailShow == index) ?
                                 <View style={{
-                                    justifyContent: 'space-between',
-                                    marginLeft: 40,
-                                    marginRight: 40,
-                                    marginTop: 50,
-                                    marginBottom: 60,
-                                    flexDirection: 'column',
-                                    backgroundColor: 'white'
+                                    width: width - 20,
+                                    alignSelf: 'center',
+                                    marginTop: 5,
+                                    paddingTop: 15,
+                                    justifyContent: 'space-around',
+                                    flexDirection: 'row',
+                                    backgroundColor: '#F5F5F5',
 
                                 }}>
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                        <Text>
-                                            Tên tôi là:
-                                        </Text>
-                                        <Text>
-                                            Nguyễn Xuân Trường
-                                        </Text>
-                                    </View>
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                                    <View style={{
+                                        justifyContent: 'space-between',
+                                        flexDirection: 'column',
+                                        marginBottom: 20
+                                    }}>
                                         <Text>
                                             Bộ phận:
                                         </Text>
                                         <Text>
-                                            Intership
-                                        </Text>
-                                    </View>
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                        <Text>
-                                            Chức vụ:
+                                            Time checkin:
                                         </Text>
                                         <Text>
-                                            Leader
+                                            Time checkout:
                                         </Text>
-                                    </View>
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
                                         <Text>
                                             Ngày:
                                         </Text>
                                         <Text>
+                                            Status:
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        justifyContent: 'space-between',
+                                        flexDirection: 'column',
+                                        marginBottom: 20
+                                    }}>
+                                        <Text>
+                                            Intership
+                                        </Text>
+                                        <Text>
+                                            08:50
+                                        </Text>
+                                        <Text>
+                                            18:00
+                                        </Text>
+                                        <Text>
                                             02/07/2018
+                                        </Text>
+                                        <Text>
+                                            Muộn 5 phút
                                         </Text>
                                     </View>
                                 </View>
@@ -202,7 +212,6 @@ export default class Home extends Component {
                         </View>
                     }
                 />
-                {/*</ScrollView>*/}
                 <View
                     style={{
                         width: width,

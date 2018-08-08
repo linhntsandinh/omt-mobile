@@ -94,7 +94,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'CreateUserPage1',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,
