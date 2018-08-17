@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {Picker, ScrollView, StatusBar, TextInput, View} from 'react-native';
+import {Picker, ScrollView, StatusBar, TextInput, View,} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import {Header} from "react-native-elements";
@@ -32,6 +32,8 @@ export default class FormDetailView extends Component<Props> {
     render() {
         const {navigation} = this.props;
         const isEdit = navigation.getParam('isEdit');
+        let a = new Date();
+        let b = a.getTime();
         return (
             <View style={BaseStyles.screen.mainContainer}>
                 <StatusBar
@@ -63,7 +65,30 @@ export default class FormDetailView extends Component<Props> {
                                 name={Icons.pencil_bold}
                                 color='white'
                                 size={25}
-                                onPress={() => this.setState({isEdit: !isEdit})}
+                                onPress={() => {
+                                    this.setState({isEdit: !isEdit});
+                                    fetch('http://192.168.1.78:9000/absence/insert', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({
+                                            reasonId: 1,
+                                            description: "Ăn cưới crush",
+                                            startTime: 123165,
+                                            endTime: 12313,
+                                            status: 2,
+                                            userId: 1,
+                                            totalTime: 1.22,
+                                            approver_id: 213123
+                                        }),
+                                    }).then((response) => response.json())
+                                        .then((res) => {
+                                            console.log(res);
+                                        }).catch(error => {
+                                        console.log(error)
+                                    })
+                                }}
                             />
                         </View>
                     }
@@ -75,187 +100,187 @@ export default class FormDetailView extends Component<Props> {
                     style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 5}}>
                 </View>
                 <ScrollView>
-                        <View style={{
-                            justifyContent: 'space-around',
-                            marginLeft: 60,
-                            marginRight: 60,
-                            marginTop: 50,
-                            marginBottom: 60,
-                            flexDirection: 'column',
-                            backgroundColor: 'white'
+                    <View style={{
+                        justifyContent: 'space-around',
+                        marginLeft: 60,
+                        marginRight: 60,
+                        marginTop: 50,
+                        // marginBottom: 60,
+                        flexDirection: 'column',
+                        backgroundColor: 'white'
 
-                        }}>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Tên tôi là:
-                                </Text>
-                                <Text>
-                                    Nguyễn Xuân Trường
-                                </Text>
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Bộ phận:
-                                </Text>
-                                <Text>
-                                    Intership
-                                </Text>
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Chức vụ:
-                                </Text>
-                                <Text>
-                                    Leader
-                                </Text>
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Ngày:
-                                </Text>
-                                <Text>
-                                    02/07/2018
-                                </Text>
-                            </View>
-                            <View style={{justifyContent: 'space-between', marginBottom: 20}}>
-                                <Text>
-                                    Thời gian từ:
-                                </Text>
-                                {isEdit ?
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                                        <Text>
-                                            22:30
-                                        </Text>
-                                        <Icon
-                                            name={Icons.calendar_bold}
-                                            size={20}
-                                            onPress={() => this.setState({isDateTimePickerVisible1: true})}
-                                        />
-                                        <Text>
-                                            02/07/2018
-                                        </Text>
-
-                                        <DateTimePicker
-                                            mode='datetime'
-                                            isVisible={this.state.isDateTimePickerVisible1}
-                                            onConfirm={(date) => {
-                                                console.log('A date has been picked: ', date);
-                                                this.setState({isDateTimePickerVisible1: false});
-                                            }}
-                                            onCancel={() => this.setState({isDateTimePickerVisible1: false})}
-                                        />
-                                    </View>
-                                    :
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                                        <Text>
-                                            22:30
-                                        </Text>
-                                        <Text>
-                                            02/07/2018
-                                        </Text>
-                                    </View>
-                                }
-                            </View>
-                            <View style={{justifyContent: 'space-between', marginBottom: 20}}>
-                                <Text>
-                                    Thời gian đến:
-                                </Text>
-                                {isEdit ?
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                                        <Text>
-                                            22:30
-                                        </Text>
-                                        <Icon
-                                            name={Icons.calendar_bold}
-                                            size={20}
-                                            onPress={() => this.setState({isDateTimePickerVisible2: true})}
-                                        />
-                                        <Text>
-                                            02/07/2018
-                                        </Text>
-
-                                        <DateTimePicker
-                                            mode='datetime'
-                                            isVisible={this.state.isDateTimePickerVisible2}
-                                            onConfirm={(date) => {
-                                                console.log('A date has been picked: ', date);
-                                                this.setState({isDateTimePickerVisible2: false});
-                                            }}
-                                            onCancel={() => this.setState({isDateTimePickerVisible2: false})}
-                                        />
-                                    </View>
-                                    :
-                                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                                        <Text>
-                                            22:30
-                                        </Text>
-                                        <Text>
-                                            02/07/2018
-                                        </Text>
-                                    </View>
-                                }
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Lý do:
-                                </Text>
-                                {isEdit ?
-                                    <TextInput
-                                        style={{
-                                            height: 20, width: 145, fontSize: 15,
-                                            padding: 0
-                                        }}
-                                        placeholder='Reason'
-                                        underlineColorAndroid='transparent'
-                                        // autoFocus={true}
-                                    />
-                                    :
-                                    <Text>
-                                        Tắc đường
-                                    </Text>
-                                }
-
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Chuyên môn:
-                                </Text>
-                                <Text>
-                                    Developer
-                                </Text>
-                            </View>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
-                                <Text>
-                                    Người nhận đơn:
-                                </Text>
-                                {isEdit ?
-                                    <View style={{flexDirection: 'row'}}>
-                                        <Picker
-                                            selectedValue={this.state.receiver}
-                                            style={{
-                                                height: 20,
-                                                width: 159,
-                                                transform: [
-                                                    {scaleX: 0.9},
-                                                    {scaleY: 0.9},
-                                                ]
-                                            }}
-
-                                            onValueChange={(itemValue, itemIndex) => this.setState({receiver: itemValue})}>
-                                            {Object.keys(Consts.employee_list).map((value, index) => {
-                                                return <Picker.Item key={index} label={Consts.employee_list[value]}
-                                                                    value={Consts.employee_list[value]}/>
-                                            })}
-                                        </Picker>
-                                    </View>
-
-                                    :
-                                    <Text>
-                                        Nguyễn Thế Linh
-                                    </Text>
-                                }
-                            </View>
+                    }}>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Tên tôi là:
+                            </Text>
+                            <Text>
+                                Nguyễn Xuân Trường
+                            </Text>
                         </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Bộ phận:
+                            </Text>
+                            <Text>
+                                Intership
+                            </Text>
+                        </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Chức vụ:
+                            </Text>
+                            <Text>
+                                Leader
+                            </Text>
+                        </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Ngày:
+                            </Text>
+                            <Text>
+                                02/07/2018
+                            </Text>
+                        </View>
+                        <View style={{justifyContent: 'space-between', marginBottom: 20}}>
+                            <Text>
+                                Thời gian từ:
+                            </Text>
+                            {isEdit ?
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                    <Text>
+                                        22:30
+                                    </Text>
+                                    <Icon
+                                        name={Icons.calendar_bold}
+                                        size={20}
+                                        onPress={() => this.setState({isDateTimePickerVisible1: true})}
+                                    />
+                                    <Text>
+                                        02/07/2018
+                                    </Text>
+
+                                    <DateTimePicker
+                                        mode='datetime'
+                                        isVisible={this.state.isDateTimePickerVisible1}
+                                        onConfirm={(date) => {
+                                            console.log('A date has been picked: ', date);
+                                            this.setState({isDateTimePickerVisible1: false});
+                                        }}
+                                        onCancel={() => this.setState({isDateTimePickerVisible1: false})}
+                                    />
+                                </View>
+                                :
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                    <Text>
+                                        22:30
+                                    </Text>
+                                    <Text>
+                                        02/07/2018
+                                    </Text>
+                                </View>
+                            }
+                        </View>
+                        <View style={{justifyContent: 'space-between', marginBottom: 20}}>
+                            <Text>
+                                Thời gian đến:
+                            </Text>
+                            {isEdit ?
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                    <Text>
+                                        22:30
+                                    </Text>
+                                    <Icon
+                                        name={Icons.calendar_bold}
+                                        size={20}
+                                        onPress={() => this.setState({isDateTimePickerVisible2: true})}
+                                    />
+                                    <Text>
+                                        02/07/2018
+                                    </Text>
+
+                                    <DateTimePicker
+                                        mode='datetime'
+                                        isVisible={this.state.isDateTimePickerVisible2}
+                                        onConfirm={(date) => {
+                                            console.log('A date has been picked: ', date);
+                                            this.setState({isDateTimePickerVisible2: false});
+                                        }}
+                                        onCancel={() => this.setState({isDateTimePickerVisible2: false})}
+                                    />
+                                </View>
+                                :
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                    <Text>
+                                        22:30
+                                    </Text>
+                                    <Text>
+                                        02/07/2018
+                                    </Text>
+                                </View>
+                            }
+                        </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Lý do:
+                            </Text>
+                            {isEdit ?
+                                <TextInput
+                                    style={{
+                                        height: 20, width: 145, fontSize: 15,
+                                        padding: 0
+                                    }}
+                                    placeholder='Reason'
+                                    underlineColorAndroid='transparent'
+                                    // autoFocus={true}
+                                />
+                                :
+                                <Text>
+                                    Tắc đường
+                                </Text>
+                            }
+
+                        </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Chuyên môn:
+                            </Text>
+                            <Text>
+                                Developer
+                            </Text>
+                        </View>
+                        <View style={{justifyContent: 'space-between', flexDirection: 'row', marginBottom: 20}}>
+                            <Text>
+                                Người nhận đơn:
+                            </Text>
+                            {isEdit ?
+                                <View style={{flexDirection: 'row'}}>
+                                    <Picker
+                                        selectedValue={this.state.receiver}
+                                        style={{
+                                            height: 20,
+                                            width: 159,
+                                            transform: [
+                                                {scaleX: 0.9},
+                                                {scaleY: 0.9},
+                                            ]
+                                        }}
+
+                                        onValueChange={(itemValue, itemIndex) => this.setState({receiver: itemValue})}>
+                                        {Object.keys(Consts.employee_list).map((value, index) => {
+                                            return <Picker.Item key={index} label={Consts.employee_list[value]}
+                                                                value={Consts.employee_list[value]}/>
+                                        })}
+                                    </Picker>
+                                </View>
+
+                                :
+                                <Text>
+                                    Nguyễn Thế Linh
+                                </Text>
+                            }
+                        </View>
+                    </View>
                 </ScrollView>
 
             </View>

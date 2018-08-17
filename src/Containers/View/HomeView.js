@@ -23,6 +23,7 @@ export default class Home extends Component {
         } else {
             Keyboard.dismiss();
         }
+
     }
 
     render() {
@@ -90,7 +91,7 @@ export default class Home extends Component {
                                 marginBottom: 10
                             }}
                             >
-                                Nguyễn Xuân Trường
+                                {/*{this.props.user['Profile']['full_name']}*/}
                             </Text>
                             <TouchableOpacity style={{
                                 width: width - 185,
@@ -102,7 +103,10 @@ export default class Home extends Component {
                                 marginLeft: 15,
                                 borderWidth: 2,
                                 borderColor: 'white'
-                            }}>
+                            }}
+                            onPress={() => {
+                            }}
+                            >
                                 <Text style={styles.text}
                                 >
                                     CHECK IN

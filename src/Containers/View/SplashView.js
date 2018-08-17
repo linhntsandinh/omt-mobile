@@ -5,7 +5,11 @@ import {View} from '../../Components';
 export default class Splash extends Component {
     componentDidMount() {
         setTimeout(() => {
-            this.props.navigation.navigate('TabMain');
+            if (this.props.isLoggedIn){
+                this.props.navigation.navigate('TabMain');
+            } else {
+                this.props.navigation.navigate('Login');
+            }
         }, 1000);
     }
     render() {

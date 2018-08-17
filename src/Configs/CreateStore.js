@@ -5,9 +5,11 @@ import createSagaMiddleware from 'redux-saga';
 import {all} from 'redux-saga/effects';
 
 import AppSagas from '../Saga/AppSagas'
+import auth from '../redux/reducers/auth'
 
 export const Reducers = combineReducers({
-    app: require('../redux/AppRedux').default
+    app: require('../redux/AppRedux').default,
+    auth
 });
 
 export function* RootSaga() {

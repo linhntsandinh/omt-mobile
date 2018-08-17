@@ -24,5 +24,6 @@ export default {
     trash: 'md-trash',
     calendar_bold: 'md-calendar',
     add_bold: 'md-add',
-    arrow_down: 'ios-arrow-down-outline'
+    arrow_down: 'ios-arrow-down-outline',
+    person: 'md-person'
 };

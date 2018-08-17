@@ -6,24 +6,32 @@ import {Colors, Metrics} from '../../Theme';
 import {Icons} from '../../Assets'
 
 let IconApp = ({
-    style,
-    name,
-    size,
-    color,
-    onPress,
-    disable
-}) => {
+                   style,
+                   name,
+                   size,
+                   color,
+                   onPress,
+                   disable,
+                   outlineContainerWidth,
+                   outlineContainerHeight
+               }) => {
     return (
         <TouchableOpacity
             disabled={disable}
             activeOpacity={Metrics.opacity}
             onPress={onPress}
-            style={[style, styles.containers]}>
+            style={[style, {
+                backgroundColor: 'transparent',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: outlineContainerWidth,
+                width: outlineContainerHeight
+            }]}>
             <Icon
                 style={styles.icon}
                 name={name}
                 size={size}
-                color={color} />
+                color={color}/>
         </TouchableOpacity>
     );
 };
@@ -48,12 +56,16 @@ IconApp.propTypes = {
     size: PropTypes.number,
     color: PropTypes.string,
     onPress: PropTypes.func,
-    disable: PropTypes.bool
+    disable: PropTypes.bool,
+    outlineContainerWidth: PropTypes.number,
+    outlineContainerHeight: PropTypes.number,
 };
 
 IconApp.defaultProps = {
     name: Icons.error,
     size: Metrics.icons.medium,
+    outlineContainerWidth: Metrics.icons.medium,
+    outlineContainerHeight: Metrics.icons.medium,
     color: Colors.text,
     disable: false
 };

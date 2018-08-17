@@ -4,6 +4,8 @@ import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
 import Consts, {width} from "../../Configs/Consts";
+import moment from "moment/moment";
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 export default class CreateUserPage3 extends Component {
 
@@ -14,14 +16,16 @@ export default class CreateUserPage3 extends Component {
             roles: null,
             day: 27,
             month: 12,
-            year: 2013
+            year: 2013,
+            isDateTimePickerVisible: false,
+            date_time: '',
         }
     }
 
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
-                <View style={{width: 320, marginTop: 20, marginBottom: 20}}>
+                <View style={{marginTop: 20, marginBottom: 20}}>
                     <Icon
                         onPress={() =>
                             this.props.navigation.goBack()
@@ -32,13 +36,13 @@ export default class CreateUserPage3 extends Component {
                         style={{marginLeft: 25}}
                     />
                 </View>
-                <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{marginTop: 30, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{
                         fontSize: 30,
                         textAlign: 'center',
                         color: '#2699FB',
                         fontFamily: 'Montserrat-Bold',
-                        marginBottom: 50
+                        marginBottom: 40
                     }}>
                         Create an User
                     </Text>
@@ -70,93 +74,71 @@ export default class CreateUserPage3 extends Component {
                         <Text style={{color: '#55AFFC', marginBottom: 5}}>
                             Chức vụ
                         </Text>
-                            <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
-                                <Picker
-                                    selectedValue={this.state.roles}
-                                    style={{
-                                        height: 50,
-                                        width: width - 100,
-                                        color: '#55AFFC',
-                                        paddingVertical: 5
-                                    }}
-                                    onValueChange={(itemValue, itemIndex) => this.setState({roles: itemValue})}>
-                                    {Object.keys(Consts.roles).map((value, index) => {
-                                        return <Picker.Item key={index} label={Consts.roles[value]}
-                                                            value={Consts.roles[value]}/>
-                                    })}
-                                </Picker>
-                            </View>
+                        <View style={{borderWidth: 1, borderColor: '#CEE8FE'}}>
+                            <Picker
+                                selectedValue={this.state.roles}
+                                style={{
+                                    height: 50,
+                                    width: width - 100,
+                                    color: '#55AFFC',
+                                    paddingVertical: 5
+                                }}
+                                onValueChange={(itemValue, itemIndex) => this.setState({roles: itemValue})}>
+                                {Object.keys(Consts.roles).map((value, index) => {
+                                    return <Picker.Item key={index} label={Consts.roles[value]}
+                                                        value={Consts.roles[value]}/>
+                                })}
+                            </Picker>
+                        </View>
                     </View>
-                    <View>
+                    <View style={{marginBottom: 25}}>
                         <Text style={{color: '#55AFFC', marginBottom: 5}}>
                             Ngày tham gia
                         </Text>
-                        <View style={{
-                            justifyContent: 'space-around',
+                        <TouchableOpacity style={{
                             alignItems: 'center',
                             flexDirection: 'row',
                             width: width - 100,
                             height: 50,
                             borderWidth: 1,
-                            borderColor: '#CEE8FE'
-                        }}>
-                            <Text style={{color: '#55AFFC'}}>
-                                {this.state.day}
+                            borderColor: '#CEE8FE',
+                            backgroundColor: 'white',
+                            paddingLeft: 10
+                        }}
+                                          onPress={() => this.setState({isDateTimePickerVisible: true})}
+                        >
+                            <Text style={{color: '#55AFFC', fontSize: 15}}>
+                                {this.state.date_time === '' ? 'Join day' : this.state.date_time}
                             </Text>
-                            <Picker
-                                selectedValue={this.state.day}
-                                style={{
-                                    height: 20,
-                                    width: 22,
-                                    color: '#55AFFC',
+                            <DateTimePicker
+                                mode='date'
+                                isVisible={this.state.isDateTimePickerVisible}
+                                is24Hour={true}
+                                onConfirm={(date) => {
+                                    this.setState({
+                                        date_time: moment(date).format('MMMM, Do YYYY'),
+                                        isDateTimePickerVisible: false
+                                    });
                                 }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({day: itemValue})}>
-                                {Object.keys(Consts.day).map((value, index) => {
-                                    return <Picker.Item key={index} label={Consts.day[value]}
-                                                        value={Consts.day[value]}/>
-                                })}
-                            </Picker>
-                            <Text style={{color: '#55AFFC'}}>
-                                {this.state.month}
-                            </Text>
-                            <Picker
-                                selectedValue={this.state.month}
-                                style={{
-                                    height: 20,
-                                    width: 22,
-                                    color: '#55AFFC',
-                                    // paddingVertical: 5
-                                }}
-                                onValueChange={(itemValue, itemIndex) => this.setState({month: itemValue})}>
-                                {Object.keys(Consts.month).map((value, index) => {
-                                    return <Picker.Item key={index} label={Consts.month[value]}
-                                                        value={Consts.month[value]}/>
-                                })}
-                            </Picker>
-                            <Text style={{color: '#55AFFC'}}>
-                                {this.state.year}
-                            </Text>
-                            <Picker
-                                selectedValue={this.state.year}
-                                style={{
-                                    height: 20,
-                                    width: 22,
-                                    color: '#55AFFC',
-                                }}
-                                onValueChange={(itemValue, itemIndex) => {
-                                    this.setState({year: itemValue});
-                                }}
-                            >
-                                {Object.keys(Consts.year).map((value, index) => {
-                                    return <Picker.Item key={index} label={Consts.year[value]}
-                                                        value={Consts.year[value]}/>
-                                })}
-                            </Picker>
-                        </View>
+                                onCancel={() => this.setState({isDateTimePickerVisible: false})}
+                            />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={BaseStyles.screen.touchableButton}
+                    <TouchableOpacity style={{
+                        width: width - 200,
+                        height: 60,
+                        borderColor: '#2699FB',
+                        borderWidth: 2,
+                        backgroundColor: 'white',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 20,
+                        marginBottom: 10,
+                        borderRadius: 10,
+                        elevation: 5
+                    }}
                                       onPress={() => {
-                                          this.props.navigation.navigate('CreateUserPage2')
+                                          this.props.navigation.navigate('CreateUserPage1')
                                       }}>
                         <Text style={BaseStyles.screen.touchableButtonText}>
                             Create

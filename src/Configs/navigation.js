@@ -8,7 +8,6 @@ import {Icons} from '../Assets'
 import Splash from '../Containers/Container/SplashContainer';
 import Home from '../Containers/Container/HomeContainer';
 import ListForm from '../Containers/Container/ListFormContainer';
-import Event from '../Containers/Container/EventContainer';
 import Profile from '../Containers/Container/ProfileContainer';
 import LoginView from "../Containers/Container/LoginContainer";
 import CreateUserPage1 from "../Containers/Container/CreateUserPage1Container";
@@ -60,13 +59,13 @@ const Navigation = createStackNavigator(
                         tabBarIcon: getIconTab(Icons.pencil)
                     }
                 },
-                Notification: {
-                    screen: Event,
-                    navigationOptions: {
-                        tabBarLabel: 'Event',
-                        tabBarIcon: getIconTab(Icons.event)
-                    }
-                },
+                // Notification: {
+                //     screen: Event,
+                //     navigationOptions: {
+                //         tabBarLabel: 'Event',
+                //         tabBarIcon: getIconTab(Icons.event)
+                //     }
+                // },
                 Profile: {
                     screen: Profile,
                     navigationOptions: {
@@ -94,7 +93,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'CreateUserPage1',
+        initialRouteName: 'TabMain',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,

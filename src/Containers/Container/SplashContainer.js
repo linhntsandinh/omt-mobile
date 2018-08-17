@@ -3,7 +3,7 @@ import SplashView from '../View/SplashView';
 
 const mapStateToProps = (state) => {
     return {
-
+        isLoggedIn: state.auth.isLoggedIn
     }
 };
 

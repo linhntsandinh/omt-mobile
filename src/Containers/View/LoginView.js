@@ -5,7 +5,7 @@
  */
 
 import React, {Component} from 'react';
-import {StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Alert, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import {Header} from "react-native-elements";
@@ -21,7 +21,7 @@ export default class LoginView extends Component<Props> {
 
     constructor() {
         super();
-        this.state = {username: '', password: '', email: ''};
+        this.state = {username: '', password: '', isShow: false}
     }
 
     getUsername(value) {
@@ -30,37 +30,37 @@ export default class LoginView extends Component<Props> {
         })
     }
 
-    getEmail(value) {
-        this.setState({
-            email: value
-        })
-    }
-
     getPassword(value) {
         this.setState({
             password: value
         })
     }
-
-    testAPI() {
-        fetch('http://192.168.1.108:9000/absence/load', {
+    handleSubmit(e) {
+        this.props.onLogin(this.state.username, this.state.password);
+        e.preventDefault();
+        fetch('http://192.168.1.83:9000/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: 'c',
-                password: 'c',
+                username: this.state.username,
+                password: this.state.password,
             }),
         }).then((response) => response.json())
             .then((res) => {
-                console.log(res);
-            }).catch(error => {console.log(error)})
+                // console.log(res);
+                this.props.onLoginSuccess(res['user_data', res['permission'], res['Profile'], res['status']]);
+                this.props.navigation.navigate('TabMain');
+            }).catch(error => {
+            console.log(error);
+            this.props.onLoginFail(error);
+            this.setState({isShow: !this.state.isShow})
+        });
     }
 
     render() {
         return (
-
             <View style={BaseStyles.screen.mainContainer}>
                 <StatusBar
                     backgroundColor='#026dc9'
@@ -91,6 +91,7 @@ export default class LoginView extends Component<Props> {
                     innerContainerStyles={{justifyContent: 'center'}}
                     outerContainerStyles={{height: 150}}
                 />
+
                 <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{
                         fontSize: 30,
@@ -119,40 +120,10 @@ export default class LoginView extends Component<Props> {
                                 placeholderTextColor='#55AFFC'
                                 selectionColor='#55AFFC'
                                 returnKeyType='next'
-                                keyboardType="email-address"
-                                onSubmitEditing={() => {
-                                    this.emailInput.focus()
-                                }}
-                                ref={(input) => this.usernameInput = input}
-                            />
-                        </View>
-                        <View
-                            style={{width: width - 100, height: 1, borderBottomColor: '#C1E2FD', borderBottomWidth: 1}}>
-                        </View>
-                    </View>
-                    <View style={{marginBottom: 25}}>
-                        <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
-                            <Icon
-                                name={Icons.email}
-                                color='#2699FB'
-                            />
-                            <TextInput
-                                style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
-                                onChangeText={(value) => {
-                                    this.getEmail(value)
-                                }}
-                                underlineColorAndroid='transparent'
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                placeholder='Email'
-                                placeholderTextColor='#55AFFC'
-                                selectionColor='#55AFFC'
-                                returnKeyType='next'
-                                keyboardType="email-address"
                                 onSubmitEditing={() => {
                                     this.passwordInput.focus()
                                 }}
-                                ref={(input) => this.emailInput = input}
+                                ref={(input) => this.usernameInput = input}
                             />
                         </View>
                         <View
@@ -177,6 +148,9 @@ export default class LoginView extends Component<Props> {
                                 placeholderTextColor='#55AFFC'
                                 selectionColor='#55AFFC'
                                 secureTextEntry={true}
+                                // onSubmitEditing={() => {
+                                //     this.loginButton.focus()
+                                // }}
                                 ref={(input) => this.passwordInput = input}
                             />
                         </View>
@@ -185,9 +159,8 @@ export default class LoginView extends Component<Props> {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
-                                      onPress={() => {
-                                          this.props.navigation.navigate('TabMain');
-                                          this.testAPI();
+                                      onPress={(e) => {
+                                          this.handleSubmit(e);
                                       }}>
                         <Text style={styles.loginText}>
                             LOG IN
@@ -207,6 +180,14 @@ export default class LoginView extends Component<Props> {
                 </View>
                 <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold}
                        buttonTitle='Send vertification' placeHolder2='Mật khẩu mới' placeHolder='Mật khẩu cũ'/>
+                { this.state.isShow ?
+                    Alert.alert(
+                        'Alert',
+                        'Please try again',
+                    )
+                    :
+                    null
+                }
             </View>
         );
     }

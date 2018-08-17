@@ -34,7 +34,7 @@ export default class CreateUserPage2 extends Component {
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
-                <View style={{width: 320, marginTop: 20, marginBottom: 50}}>
+                <View style={{marginTop: 20, marginBottom: 50}}>
                     <Icon
                         onPress={() =>
                             this.props.navigation.goBack()
@@ -45,7 +45,7 @@ export default class CreateUserPage2 extends Component {
                         style={{marginLeft: 25}}
                     />
                 </View>
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{alignItems: 'center'}}>
                     <Text style={{
                         fontSize: 30,
                         textAlign: 'center',
@@ -69,7 +69,6 @@ export default class CreateUserPage2 extends Component {
                                 placeholderTextColor='#55AFFC'
                                 selectionColor='#55AFFC'
                                 returnKeyType='next'
-                                keyboardType="email-address"
                                 onSubmitEditing={() => {
                                     this.birthdayInput.focus()
                                 }}
@@ -80,7 +79,7 @@ export default class CreateUserPage2 extends Component {
                             style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 25}}>
+                    <View style={{ marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
@@ -103,7 +102,7 @@ export default class CreateUserPage2 extends Component {
                             style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center', marginBottom: 25}}>
+                    <View style={{marginBottom: 25}}>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
@@ -126,7 +125,7 @@ export default class CreateUserPage2 extends Component {
                             style={{width: width - 100, height: 1, borderBottomColor: '#CEE8FE', borderBottomWidth: 1}}>
                         </View>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
+                    <View>
                         <View style={{alignItems: 'center', flexDirection: 'row', paddingVertical: 6}}>
                             <TextInput
                                 style={{flex: 1, padding: 0, paddingHorizontal: 8, color: '#55AFFC'}}
@@ -154,6 +153,8 @@ export default class CreateUserPage2 extends Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
+                {/*<KeyboardAvoidingView behavior='padding' enabled>*/}
+                {/*</KeyboardAvoidingView>*/}
             </View>
         );
     }

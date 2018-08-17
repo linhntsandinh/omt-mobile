@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Icon, View} from '../../Components'
-import {Image, ImageBackground, ScrollView, TextInput, TouchableOpacity} from "react-native";
+import {Image, ScrollView, TextInput, TouchableOpacity} from "react-native";
 import Text from "../../Components/Base/Text";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
 import {height, moderateScale, width} from "../../Configs/Consts";
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment'
+import pick from '../../Components/Base/ImagePicker'
 
 export default class ProfileView extends Component {
     constructor() {
@@ -21,9 +22,12 @@ export default class ProfileView extends Component {
             team: '',
             roles: '',
             joinedDay: '',
-            isDateTimePickerVisible: false
+            isDateTimePickerVisible: false,
+            avatarSource: null,
+            data: null
         };
     }
+
     getName(value) {
         this.setState({
             name: value
@@ -65,6 +69,14 @@ export default class ProfileView extends Component {
             hometown: value
         })
     }
+
+    show() {
+        pick((source, data) => this.setState({avatarSource: source, data: data}));
+    }
+    userLogout(e) {
+        this.props.onLogout();
+        e.preventDefault();
+    }
     render() {
         const {isEdit} = this.state;
         return (
@@ -78,40 +90,62 @@ export default class ProfileView extends Component {
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start'
                 }}>
-                    <ImageBackground source={require('../../Assets/Image/wallhaven-367110.png')}
-                                     style={{width: '100%', height: '100%'}}/>
-                    <Icon
-                        style={{position: 'absolute', left: 20, top: 10}}
-                        name='ios-arrow-back-outline'
-                        color='black'
-                        size={30}
-                    />
-                    <Icon
-                        style={{position: 'absolute', right: 20, top: 10}}
-                        name='ios-log-out-outline'
-                        color='black'
-                        size={30}
-                    />
-                    <Text
-                        style={{
-                            position: 'absolute',
-                            right: moderateScale(width * 0.1),
-                            top: moderateScale(height * 0.45),
-                        }}
-                        color='white'
-                        fontSize={20}
-                    > Nguyễn Xuân Trường</Text>
+                    <View
+                        style={{width: '100%', height: '100%', backgroundColor: '#008BFF'}}
+                    >
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <View style={{
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginTop: 20,
+                                marginLeft: 15
+                            }}>
+                                <Icon
+                                    style={{}}
+                                    name='ios-arrow-back-outline'
+                                    color='white'
+                                    size={30}
+                                />
+                                <Text
+                                    color='white'
+                                    fontSize={18}
+                                    style={{marginLeft: 30,}}
+                                >
+                                    Tài khoản
+                                </Text>
+                            </View>
+                            <Icon
+                                style={{alignSelf: 'flex-end', marginRight: 20}}
+                                name='ios-log-out-outline'
+                                color='white'
+                                size={30}
+                                onPress={(e) => {
+                                    this.userLogout(e);
+                                    this.props.navigation.navigate('Login');
+                                }}
+                            />
+                        </View>
+                        <Text
+                            style={{
+                                position: 'absolute',
+                                right: moderateScale(width * 0.1),
+                                top: moderateScale(height * 0.45),
+                            }}
+                            color='white'
+                            fontSize={20}
+                        > Nguyễn Xuân Trường</Text>
+                    </View>
                 </TouchableOpacity>
                 <View style={{
-                    width: moderateScale(width * 0.4),
-                    height: moderateScale(height * 0.2),
+                    width: moderateScale(width * 0.39),
+                    height: moderateScale(height * 0.21),
                     backgroundColor: 'white',
                     alignItems: 'center',
-                    position: 'absolute', top: moderateScale(height * 0.45), left: moderateScale(width * 0.145),
+                    position: 'absolute', top: moderateScale(height * 0.445), left: moderateScale(width * 0.145),
                     borderTopRightRadius: 70, borderTopLeftRadius: 70,
                 }}>
                 </View>
-
                 <ScrollView style={{
                     backgroundColor: '#E1F2FF',
                     width: '95%',
@@ -121,7 +155,7 @@ export default class ProfileView extends Component {
 
                 }}>
                     <View>
-                        <View style={{marginTop: 20, marginHorizontal: 40}}>
+                        <View style={{marginTop: 30, marginHorizontal: 40}}>
                             <Text style={{marginBottom: 7}}
                                   color='#55AFFC'
                                   fontSize={10}
@@ -206,7 +240,10 @@ export default class ProfileView extends Component {
                                         isVisible={this.state.isDateTimePickerVisible}
                                         is24Hour={true}
                                         onConfirm={(date) => {
-                                            this.setState({date_time: moment(date).format('MMMM, Do YYYY'), isDateTimePickerVisible: false});
+                                            this.setState({
+                                                date_time: moment(date).format('MMMM, Do YYYY'),
+                                                isDateTimePickerVisible: false
+                                            });
                                         }}
                                         onCancel={() => this.setState({isDateTimePickerVisible: false})}
                                     />
@@ -577,16 +614,46 @@ export default class ProfileView extends Component {
                         </View>
                     </View>
                 </ScrollView>
-                <TouchableOpacity
-                    style={{position: 'absolute', top: moderateScale(height * 0.465), left: moderateScale(width * 0.173)}}
+                <View
+                    style={{
+                        position: 'absolute',
+                        top: moderateScale(height * 0.465),
+                        left: moderateScale(width * 0.173),
+                        width: moderateScale(width * 0.33),
+                        height: moderateScale(height * 0.19),
+                        borderRadius: moderateScale(70),
+                        backgroundColor: '#BCE0FD',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
                 >
-                    <Image source={require('../../Assets/Image/wallhaven-367110.png')}
-                           style={{
-                               width: moderateScale(width * 0.35),
-                               height: moderateScale(height * 0.2),
-                               borderRadius: moderateScale(70),
-                           }}/>
-                </TouchableOpacity>
+                    {this.state.avatarSource == null ?
+                        <Icon
+                            name={Icons.person}
+                            size={50}
+                            color='#008BFF'
+                            outlineContainerHeight={45}
+                            outlineContainerWidth={45}
+                            onPress={() => this.show()}
+                        />
+                        :
+                        <TouchableOpacity
+                            style={{
+                                flex: 1, alignSelf: 'stretch',
+                                borderRadius: 75
+                            }}
+                            onPress={() => this.show()}>
+                        <Image
+                            source={this.state.avatarSource}
+                            resizeMode='cover'
+                            style={{
+                                flex: 1, alignSelf: 'stretch',
+                                borderRadius: 75
+                            }}
+                        />
+                        </TouchableOpacity>
+                    }
+                </View>
             </View>
         );
     }
