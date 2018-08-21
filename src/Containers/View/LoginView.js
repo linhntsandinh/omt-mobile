@@ -38,7 +38,7 @@ export default class LoginView extends Component<Props> {
     handleSubmit(e) {
         this.props.onLogin(this.state.username, this.state.password);
         e.preventDefault();
-        fetch('http://192.168.1.83:9000/user/login', {
+        fetch('http://192.168.3.42:9000/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,9 +49,11 @@ export default class LoginView extends Component<Props> {
             }),
         }).then((response) => response.json())
             .then((res) => {
-                // console.log(res);
-                this.props.onLoginSuccess(res['user_data', res['permission'], res['Profile'], res['status']]);
+                // console.log(res['user_data']);
+                this.props.onLoginSuccess(res);
+                // console.log(this.props.user);
                 this.props.navigation.navigate('TabMain');
+
             }).catch(error => {
             console.log(error);
             this.props.onLoginFail(error);

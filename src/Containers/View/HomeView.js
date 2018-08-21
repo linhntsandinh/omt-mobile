@@ -5,6 +5,7 @@ import {FlatList, Image, Keyboard, StatusBar, StyleSheet, Text, TouchableOpacity
 import {Icons} from "../../Assets";
 import InputText from "../../Components/Base/InputText";
 import {width} from "../../Configs/Consts"
+import moment from 'moment'
 // const height = Dimensions.get('window').height;
 export default class Home extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ export default class Home extends Component {
             textSearch: '',
             isDetailShow: null
         };
+        console.log(new Date())
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -25,7 +27,29 @@ export default class Home extends Component {
         }
 
     }
-
+    handleSubmit(e) {
+        e.preventDefault();
+        fetch('http://192.168.3.42:9000/timelog/insert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                // user_id: this.props.user['user_data']['id'],
+                date: moment(new Date()).format('DD-MM-YYYY'),
+                start_time: '15:25:20',
+                end_time: '15:25:20',
+                device_info:'quy',
+                create_by: 1,
+                update_by: 1
+            }),
+        }).then((response) => response.json())
+            .then((res) => {
+                console.log(res);
+            }).catch(error => {
+            console.log(error);
+        });
+    }
     render() {
         const {isSearch, isDetailShow} = this.state;
         return (
@@ -92,6 +116,7 @@ export default class Home extends Component {
                             }}
                             >
                                 {/*{this.props.user['Profile']['full_name']}*/}
+                                hello
                             </Text>
                             <TouchableOpacity style={{
                                 width: width - 185,
@@ -104,7 +129,8 @@ export default class Home extends Component {
                                 borderWidth: 2,
                                 borderColor: 'white'
                             }}
-                            onPress={() => {
+                            onPress={(e) => {
+                                this.handleSubmit(e)
                             }}
                             >
                                 <Text style={styles.text}
