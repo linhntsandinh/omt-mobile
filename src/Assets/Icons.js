@@ -25,5 +25,7 @@ export default {
     calendar_bold: 'md-calendar',
     add_bold: 'md-add',
     arrow_down: 'ios-arrow-down-outline',
-    person: 'md-person'
+    person: 'md-person',
+    add_person: 'md-person-add',
+    podium: 'ios-podium-outline'
 };

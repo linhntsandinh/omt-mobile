@@ -13,7 +13,7 @@ export default class ProfileView extends Component {
     constructor() {
         super();
         this.state = {
-            isEdit: true,
+            isEdit: false,
             name: '',
             date_time: '',
             hometown: '',
@@ -73,10 +73,6 @@ export default class ProfileView extends Component {
     show() {
         pick((source, data) => this.setState({avatarSource: source, data: data}));
     }
-    userLogout(e) {
-        this.props.onLogout();
-        e.preventDefault();
-    }
     render() {
         const {isEdit} = this.state;
         return (
@@ -120,8 +116,8 @@ export default class ProfileView extends Component {
                                 name='ios-log-out-outline'
                                 color='white'
                                 size={30}
-                                onPress={(e) => {
-                                    this.userLogout(e);
+                                onPress={() => {
+                                    // this.props.onLogout();
                                     this.props.navigation.navigate('Login');
                                 }}
                             />
@@ -155,7 +151,7 @@ export default class ProfileView extends Component {
 
                 }}>
                     <View>
-                        <View style={{marginTop: 30, marginHorizontal: 40}}>
+                        <View style={{marginTop: 20, marginHorizontal: 40}}>
                             <Text style={{marginBottom: 7}}
                                   color='#55AFFC'
                                   fontSize={10}
@@ -206,7 +202,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        Nguyễn Xuân Trường
+                                        {this.props.user['Profile']['full_name']}
                                     </Text>
                                 </View>
                             }
@@ -241,7 +237,7 @@ export default class ProfileView extends Component {
                                         is24Hour={true}
                                         onConfirm={(date) => {
                                             this.setState({
-                                                date_time: moment(date).format('MMMM, Do YYYY'),
+                                                date_time: moment(date).format('DD-MM-YYYY'),
                                                 isDateTimePickerVisible: false
                                             });
                                         }}
@@ -270,7 +266,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        14/08/1997
+                                        {this.props.user['Profile']['birth_date']}
                                     </Text>
                                 </View>
                             }
@@ -326,7 +322,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        Hà Nội
+                                        {this.props.user['Profile']['address']}
                                     </Text>
                                 </View>
                             }
@@ -383,7 +379,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        01672599545
+                                        {this.props.user['Profile']['phone_number']}
                                     </Text>
                                 </View>
                             }
@@ -439,7 +435,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        truongnx2@sandinh.net
+                                        {this.props.user['user_data']['email']}
                                     </Text>
                                 </View>
                             }
@@ -495,7 +491,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        Thực tập sinh
+                                        {this.props.user['Profile']['department']['name']}
                                     </Text>
                                 </View>
                             }
@@ -551,7 +547,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        Leader
+                                        {this.props.user['Profile']['job_title']['name']}
                                     </Text>
                                 </View>
                             }
@@ -607,7 +603,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        11/06/2017
+                                        {this.props.user['Profile']['join_date']}
                                     </Text>
                                 </View>
                             }
@@ -643,17 +639,52 @@ export default class ProfileView extends Component {
                                 borderRadius: 75
                             }}
                             onPress={() => this.show()}>
-                        <Image
-                            source={this.state.avatarSource}
-                            resizeMode='cover'
-                            style={{
-                                flex: 1, alignSelf: 'stretch',
-                                borderRadius: 75
-                            }}
-                        />
+                            <Image
+                                source={this.state.avatarSource}
+                                resizeMode='cover'
+                                style={{
+                                    flex: 1, alignSelf: 'stretch',
+                                    borderRadius: 75
+                                }}
+                            />
                         </TouchableOpacity>
                     }
                 </View>
+                <View style={{
+                    position: 'absolute',
+                    top: moderateScale(height * 0.595),
+                    right: moderateScale(width * 0.04),
+                    // backgroundColor: '#E1F2FF',
+                    width: 30,
+                    height: 22,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    ...BaseStyles.shadow,
+                }}>
+                    <Icon
+                        onPress={() => {
+                            this.setState({isEdit: !isEdit})
+                        }}
+                        name={Icons.pencil_bold}
+                        color='#2699FB'
+                        size={20}
+                    />
+                </View>
+                <Icon
+                    style={{
+                        position: 'absolute',
+                        top: moderateScale(height * 0.586),
+                        right: moderateScale(width * 0.2),
+                        ...BaseStyles.shadow,
+                    }}
+                    onPress={() => {
+                        this.setState({isEdit: !isEdit});
+                        this.props.navigation.navigate('CreateUserPage1')
+                    }}
+                    name={Icons.add_person}
+                    color='#2699FB'
+                    size={21}
+                />
             </View>
         );
     }

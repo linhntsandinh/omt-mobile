@@ -3,6 +3,8 @@ import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {BaseStyles} from "../../Theme";
 import {width} from "../../Configs/Consts"
 import pick from "../../Components/Base/ImagePicker";
+import Icons from "../../Assets/Icons";
+import Icon from "../../Components/Base/Icon";
 
 export default class CreateUserPage1 extends Component {
     constructor() {
@@ -45,7 +47,18 @@ export default class CreateUserPage1 extends Component {
         });
         return (
             <View style={BaseStyles.screen.mainContainer}>
-                <View style={{marginTop: 100,  alignItems: 'center', flex: 1}}>
+                <View style={{marginTop: 20, marginBottom: 50}}>
+                    <Icon
+                        onPress={() =>
+                            this.props.navigation.goBack()
+                        }
+                        name={Icons.back_round}
+                        color='#2699FB'
+                        size={35}
+                        style={{marginLeft: 25}}
+                    />
+                </View>
+                <View style={{ alignItems: 'center', flex: 1}}>
                         <Text style={{
                             fontSize: 30,
                             textAlign: 'center',

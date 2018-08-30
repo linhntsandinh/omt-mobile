@@ -21,7 +21,7 @@ export default class LoginView extends Component<Props> {
 
     constructor() {
         super();
-        this.state = {username: '', password: '', isShow: false}
+        this.state = {username: '', password: '', isShow: false, error: ''}
     }
 
     getUsername(value) {
@@ -35,10 +35,9 @@ export default class LoginView extends Component<Props> {
             password: value
         })
     }
-    handleSubmit(e) {
+    handleSubmit() {
         this.props.onLogin(this.state.username, this.state.password);
-        e.preventDefault();
-        fetch('http://192.168.3.42:9000/user/login', {
+        fetch('http://192.168.1.55:9000/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,18 +48,38 @@ export default class LoginView extends Component<Props> {
             }),
         }).then((response) => response.json())
             .then((res) => {
-                // console.log(res['user_data']);
+                console.log(res);
                 this.props.onLoginSuccess(res);
-                // console.log(this.props.user);
-                this.props.navigation.navigate('TabMain');
-
+                if (res['status'] === 'OK'){
+                    this.props.navigation.navigate('TabMain');
+                } else {
+                    this.setState({isShow: true});
+                    this.setState({error: 'Please try again'})
+                }
             }).catch(error => {
             console.log(error);
             this.props.onLoginFail(error);
-            this.setState({isShow: !this.state.isShow})
+            this.setState({isShow: true});
+            this.setState({error: error})
         });
     }
+    isValid() {
+        const { username, password } = this.state;
+        let valid = false;
 
+        if (username.length > 0 && password.length > 0) {
+            valid = true;
+        }
+
+        if (username.length === 0) {
+            this.setState({ error: 'You must enter an username' });
+            this.setState({isShow: true});
+        } else if (password.length === 0) {
+            this.setState({ error: 'You must enter a password' });
+            this.setState({isShow: true});
+        }
+        return valid;
+    }
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
@@ -161,8 +180,10 @@ export default class LoginView extends Component<Props> {
                         </View>
                     </View>
                     <TouchableOpacity style={styles.loginButton}
-                                      onPress={(e) => {
-                                          this.handleSubmit(e);
+                                      onPress={() => {
+                                          if (this.isValid()){
+                                              this.handleSubmit();
+                                          }
                                       }}>
                         <Text style={styles.loginText}>
                             LOG IN
@@ -184,8 +205,11 @@ export default class LoginView extends Component<Props> {
                        buttonTitle='Send vertification' placeHolder2='Mật khẩu mới' placeHolder='Mật khẩu cũ'/>
                 { this.state.isShow ?
                     Alert.alert(
-                        'Alert',
-                        'Please try again',
+                        'Login Fail',
+                        this.state.error,
+                        [
+                            {text: 'Ok', onPress: () => this.setState({isShow: false}), style: 'Ok'},
+                        ]
                     )
                     :
                     null

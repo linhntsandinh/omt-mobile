@@ -32,8 +32,6 @@ export default class FormDetailView extends Component<Props> {
     render() {
         const {navigation} = this.props;
         const isEdit = navigation.getParam('isEdit');
-        let a = new Date();
-        let b = a.getTime();
         return (
             <View style={BaseStyles.screen.mainContainer}>
                 <StatusBar
@@ -67,7 +65,7 @@ export default class FormDetailView extends Component<Props> {
                                 size={25}
                                 onPress={() => {
                                     this.setState({isEdit: !isEdit});
-                                    fetch('http://192.168.1.78:9000/absence/insert', {
+                                    fetch('http://192.168.1.55:9000/absence/insert', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',

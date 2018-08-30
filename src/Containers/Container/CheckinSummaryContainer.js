@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import EventView from '../View/EventView';
+import CheckinSummary from '../View/CheckinSummary';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventView);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckinSummary);

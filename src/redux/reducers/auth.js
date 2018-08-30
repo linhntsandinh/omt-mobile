@@ -5,7 +5,6 @@ const INITIAL_STATE = {
         password: '',
     },
     user: null,
-
     error: '',
     timeLog: {
         userId: null,
@@ -41,15 +40,13 @@ export default function (state = INITIAL_STATE, action) {
             });
         case 'CHECK_IN':
             return {
-                timeLog: {
-                    userId: action.userId,
-                    date: action.data,
-                    startTime: action.startTime,
-                    endTime: action.endTime,
-                    deviceInfo: action.deviceInfo,
-                    createBy: action.createBy,
-                    updateBy: action.updateBy
-                }
+                userId: action.userId,
+                date: action.date,
+                startTime: action.startTime,
+                endTime: action.endTime,
+                deviceInfo: action.deviceInfo,
+                createBy: action.createBy,
+                updateBy: action.updateBy
             };
         default:
             return state;

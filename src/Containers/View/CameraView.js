@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Header, Icon, View} from '../../Components'
+import {Header, View} from '../../Components'
 import {BaseStyles} from '../../Theme'
-import {Icons} from '../../Assets'
 
 export default class Camera extends Component {
     render() {
@@ -13,9 +12,9 @@ export default class Camera extends Component {
                 <Header
                     title={routeName}
                 >
-                    <Icon
-                        name={Icons.back_right}
-                        onPress={() => this.props.navigation.navigate('Home')} />
+                    {/*<Icon*/}
+                        {/*name={Icons.back_right}*/}
+                        {/*onPress={() => this.props.navigation.navigate('Home')} />*/}
                 </Header>
             </View>
         );

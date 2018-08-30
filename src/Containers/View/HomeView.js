@@ -6,7 +6,7 @@ import {Icons} from "../../Assets";
 import InputText from "../../Components/Base/InputText";
 import {width} from "../../Configs/Consts"
 import moment from 'moment'
-// const height = Dimensions.get('window').height;
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -14,9 +14,13 @@ export default class Home extends Component {
         this.state = {
             isSearch: false,
             textSearch: '',
-            isDetailShow: null
+            isDetailShow: null,
+            isCheckout: false,
+            checkoutId: null,
+            startTime: null
         };
-        console.log(new Date())
+        this.handleCheckin = this.handleCheckin.bind(this);
+        this.handleCheckout = this.handleCheckout.bind(this);
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -27,31 +31,61 @@ export default class Home extends Component {
         }
 
     }
-    handleSubmit(e) {
-        e.preventDefault();
-        fetch('http://192.168.3.42:9000/timelog/insert', {
+
+    handleCheckout() {
+        fetch('http://192.168.1.55:9000/timelog/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                // user_id: this.props.user['user_data']['id'],
+                id: this.state.checkoutId,
+                user_id: this.props.user['user_data']['id'],
                 date: moment(new Date()).format('DD-MM-YYYY'),
-                start_time: '15:25:20',
-                end_time: '15:25:20',
-                device_info:'quy',
+                start_time: this.state.startTime,
+                end_time: new Date().toLocaleTimeString(),
+                device_info: '{' + 'hello' + '}',
                 create_by: 1,
                 update_by: 1
             }),
         }).then((response) => response.json())
             .then((res) => {
                 console.log(res);
+                this.setState({isCheckout: !this.state.isCheckout})
             }).catch(error => {
             console.log(error);
         });
     }
+
+    handleCheckin() {
+        fetch('http://192.168.1.55:9000/timelog/insert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: this.props.user['user_data']['id'],
+                date: moment(new Date()).format('DD-MM-YYYY'),
+                start_time: new Date().toLocaleTimeString(),
+                end_time: new Date().toLocaleTimeString(),
+                device_info: '{' + 'hello' + '}',
+                create_by: 1,
+                update_by: 1
+            }),
+        }).then((response) => response.json())
+            .then((res) => {
+                console.log(res);
+                this.setState({checkoutId: res['data']});
+                this.setState({startTime: new Date().toLocaleTimeString()})
+                this.setState({isCheckout: !this.state.isCheckout})
+            }).catch(error => {
+            console.log(error);
+        });
+
+    }
+
     render() {
-        const {isSearch, isDetailShow} = this.state;
+        const {isSearch, isDetailShow, isCheckout} = this.state;
         return (
             <View style={BaseStyles.screen.mainContainer}>
                 <StatusBar
@@ -115,8 +149,7 @@ export default class Home extends Component {
                                 marginBottom: 10
                             }}
                             >
-                                {/*{this.props.user['Profile']['full_name']}*/}
-                                hello
+                                {this.props.user['Profile']['full_name']}
                             </Text>
                             <TouchableOpacity style={{
                                 width: width - 185,
@@ -129,14 +162,27 @@ export default class Home extends Component {
                                 borderWidth: 2,
                                 borderColor: 'white'
                             }}
-                            onPress={(e) => {
-                                this.handleSubmit(e)
-                            }}
+                                              onPress={() => {
+                                                  if (isCheckout) {
+                                                      this.handleCheckout();
+                                                  } else {
+                                                      this.handleCheckin();
+                                                  }
+
+                                              }}
                             >
-                                <Text style={styles.text}
-                                >
-                                    CHECK IN
-                                </Text>
+                                {this.state.isCheckout ?
+                                    <Text style={styles.text}
+                                    >
+                                        CHECK OUT
+                                    </Text>
+                                    :
+                                    <Text style={styles.text}
+                                    >
+                                        CHECK IN
+                                    </Text>
+                                }
+
                             </TouchableOpacity>
                         </View>
                     </View>

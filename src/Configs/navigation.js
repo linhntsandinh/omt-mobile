@@ -15,9 +15,10 @@ import CreateUserPage2 from "../Containers/Container/CreateUserPage2Container"
 import CreateUserPage3 from "../Containers/Container/CreateUserPage3Container";
 import EditMail from "../Containers/Container/EditMailContainer";
 import FormDetailView from "../Containers/Container/FormDetailContainer";
+import CheckinSummary from "../Containers/Container/CheckinSummaryContainer"
 
-const getIconTab = (name) => ({ tintColor }) => (
-    <Icon name={name} color={tintColor} disable />
+const getIconTab = (name) => ({tintColor}) => (
+    <Icon name={name} color={tintColor} disable/>
 );
 
 const Navigation = createStackNavigator(
@@ -45,35 +46,36 @@ const Navigation = createStackNavigator(
         },
         TabMain: {
             screen: createBottomTabNavigator({
-                TabHome: {
-                    screen: Home,
-                    navigationOptions: {
-                        tabBarLabel: 'TimeKeeping',
-                        tabBarIcon: getIconTab(Icons.calendar)
-                    }
-                },
-                ListForm: {
-                    screen: ListForm,
-                    navigationOptions: {
-                        tabBarLabel: 'ListForm',
-                        tabBarIcon: getIconTab(Icons.pencil)
-                    }
-                },
-                // Notification: {
-                //     screen: Event,
-                //     navigationOptions: {
-                //         tabBarLabel: 'Event',
-                //         tabBarIcon: getIconTab(Icons.event)
-                //     }
-                // },
-                Profile: {
-                    screen: Profile,
-                    navigationOptions: {
-                        tabBarLabel: 'Profile',
-                        tabBarIcon: getIconTab(Icons.profile)
-                    }
-                },
-            }, {
+                    TabHome: {
+                        screen: Home,
+                        navigationOptions: {
+                            tabBarLabel: 'TimeKeeping',
+                            tabBarIcon: getIconTab(Icons.calendar)
+                        }
+                    },
+                    ListForm: {
+                        screen: ListForm,
+                        navigationOptions: {
+                            tabBarLabel: 'ListForm',
+                            tabBarIcon: getIconTab(Icons.pencil)
+                        }
+                    },
+
+                    Profile: {
+                        screen: Profile,
+                        navigationOptions: {
+                            tabBarLabel: 'Profile',
+                            tabBarIcon: getIconTab(Icons.profile)
+                        }
+                    },
+                    Summary: {
+                        screen: CheckinSummary,
+                        navigationOptions: {
+                            tabBarLabel: 'Event',
+                            tabBarIcon: getIconTab(Icons.podium)
+                        }
+                    },
+                }, {
                     swipeEnabled: false,
                     lazy: true,
                     tabBarOptions: {
@@ -93,7 +95,7 @@ const Navigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'TabMain',
+        initialRouteName: 'Splash',
         headerMode: 'none',
         cardStyle: {
             ...BaseStyles.disable_shadow,
@@ -103,6 +105,6 @@ const Navigation = createStackNavigator(
     }
 );
 
-const mapStateToProps = (state) => ({ nav: state.nav });
+const mapStateToProps = (state) => ({nav: state.nav, isLoggedIn: state.auth.isLoggedIn});
 
 export default connect(mapStateToProps)(Navigation);
