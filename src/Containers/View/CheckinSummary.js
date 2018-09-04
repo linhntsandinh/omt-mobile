@@ -5,11 +5,28 @@ import {width} from "../../Configs/Consts";
 import Text from "../../Components/Base/Text";
 import {FlatList} from "react-native";
 import {Header} from "react-native-elements";
+import moment from "moment/moment";
 
 export default class CheckinSummary extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
+
+    handleSubmit() {
+        fetch('http://192.168.1.55:9000/timelog/count/' + moment(new Date()).format('DD-MM-YYYY'), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json())
+            .then((res) => {
+                console.log(res);
+                this.props.getAllUsersSummary(res)
+            }).catch(error => {
+            console.log(error);
+        });
+    }
+
     render() {
         return (
             <View
@@ -23,7 +40,9 @@ export default class CheckinSummary extends Component {
                             justifyContent: 'space-around',
                             flexDirection: 'row',
                             alignItems: 'center',
-                        }}>
+                        }}
+                              onPress={this.handleSubmit()}
+                        >
                             <Text
                                 fontSize={24}
                                 color='white'
@@ -43,7 +62,7 @@ export default class CheckinSummary extends Component {
                     style={{marginTop: 25}}
                     renderItem={({item, index}) =>
                         <View>
-                            <View style={{justifyContent: 'center', alignItems: 'center', }}>
+                            <View style={{justifyContent: 'center', alignItems: 'center',}}>
                                 <Text fontSize={15}>
                                     Nguyễn Xuân Trường
                                 </Text>

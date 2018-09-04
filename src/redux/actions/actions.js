@@ -18,4 +18,12 @@ export const checkin = (userId, date, startTime, endTime, deviceInfo, createBy, 
     updateBy: updateBy
 });
 export const logout = () => ({type: 'LOGOUT'});
+export const getAllUsers = (all_users) => ({
+    type: 'GET_ALL_USERS',
+    all_users: all_users
+});
+export const getAllUsersSummary = (all_users_summary) => ({
+    type: 'GET_ALL_USERS_SUMMARY',
+    all_users: all_users_summary
+});
 

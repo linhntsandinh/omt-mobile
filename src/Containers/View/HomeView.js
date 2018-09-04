@@ -21,6 +21,7 @@ export default class Home extends Component {
         };
         this.handleCheckin = this.handleCheckin.bind(this);
         this.handleCheckout = this.handleCheckout.bind(this);
+
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -29,7 +30,6 @@ export default class Home extends Component {
         } else {
             Keyboard.dismiss();
         }
-
     }
 
     handleCheckout() {
@@ -134,7 +134,9 @@ export default class Home extends Component {
                     style={{width: width - 20, height: 150, backgroundColor: '#E1F2FF', alignSelf: 'center'}}>
                     <View
                         style={{margin: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => {
+                            this.setState({isDetailShow: 'hello'});
+                        }}>
                             <Image source={require('../../Assets/Image/wallhaven-367110.png')}
                                    style={{width: 100, height: 100, borderRadius: 70}}/>
                         </TouchableOpacity>
@@ -189,7 +191,7 @@ export default class Home extends Component {
 
                 </TouchableOpacity>
                 <FlatList
-                    data={[{key: 'a'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]}
+                    data={this.props.all_users.data}
                     renderItem={({item, index}) =>
                         <View>
                             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -203,15 +205,22 @@ export default class Home extends Component {
                                     }}>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={() => this.setState({isDetailShow: index})}
+                                    onPress={() => {
+                                        console.log(this.state.isDetailShow, index);
+                                        this.setState({isDetailShow: index});
+                                        console.log(this.state.isDetailShow, index)
+                                    }}
                                     style={{
                                         width: width - 20,
-                                        justifyContent: 'center',
+                                        justifyContent: 'space-between',
                                         alignItems: 'center',
                                         flexDirection: 'row',
                                         backgroundColor: '#E1F2FF',
+                                        paddingHorizontal: 20
                                     }}>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                                    <TouchableOpacity
+                                        // onPress={() => this.props.navigation.navigate('Profile')}
+                                    >
                                         <Image source={require('../../Assets/Image/wallhaven-367110.png')}
                                                style={{width: 105, height: 105, borderRadius: 70}}/>
                                     </TouchableOpacity>
@@ -224,11 +233,11 @@ export default class Home extends Component {
                                         marginLeft: 15
                                     }}
                                     >
-                                        Thông tin chấm công
+                                        {item.profile['full_name']}
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                            {(isDetailShow == index) ?
+                            {(isDetailShow === index) ?
                                 <View style={{
                                     width: width - 20,
                                     alignSelf: 'center',
@@ -266,7 +275,7 @@ export default class Home extends Component {
                                         marginBottom: 20
                                     }}>
                                         <Text>
-                                            Intership
+                                            {item['department']}
                                         </Text>
                                         <Text>
                                             08:50
@@ -303,12 +312,6 @@ export default class Home extends Component {
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
-    },
     text: {
         fontSize: 20,
         textAlign: 'center',

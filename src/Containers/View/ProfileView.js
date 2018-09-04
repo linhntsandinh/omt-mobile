@@ -491,7 +491,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        {this.props.user['Profile']['department']['name']}
+                                        {this.props.user['department']['name']}
                                     </Text>
                                 </View>
                             }
@@ -547,7 +547,7 @@ export default class ProfileView extends Component {
                                         fontSize={14}
                                         align='center'
                                     >
-                                        {this.props.user['Profile']['job_title']['name']}
+                                        {this.props.user['job_title']['title']}
                                     </Text>
                                 </View>
                             }

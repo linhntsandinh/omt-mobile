@@ -4,10 +4,11 @@ import {AppCreators} from '../../redux/AppRedux'
 import {checkin} from "../../redux/actions/actions";
 
 const mapStateToProps = (state) => {
-    // console.log(state.auth.user);
+    // console.log(state.auth.all_users);
     return {
         user: state.auth.user,
-        time_log: state.auth.timeLog
+        time_log: state.auth.timeLog,
+        all_users: state.auth.all_users
     }
 };
 

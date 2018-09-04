@@ -5,15 +5,15 @@
  */
 
 import React, {Component} from 'react';
-import {Alert, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
-import {Header} from "react-native-elements";
 import Icons from "../../Assets/Icons";
 import Popup from "../../Components/Base/Popup";
 import {width} from "../../Configs/Consts"
-// const height = Dimensions.get('window').height;
-type Props = {};
+import * as Progress from 'react-native-progress';
+import moment from "moment/moment";
+
 export default class LoginView extends Component<Props> {
     static navigationOptions = ({
         header: null,
@@ -21,7 +21,11 @@ export default class LoginView extends Component<Props> {
 
     constructor() {
         super();
-        this.state = {username: '', password: '', isShow: false, error: ''}
+        this.state = {
+            username: '', password: '', isShow: false, error: '', progress: 0,
+            indeterminate: true,
+            loading: false,
+        }
     }
 
     getUsername(value) {
@@ -35,13 +39,29 @@ export default class LoginView extends Component<Props> {
             password: value
         })
     }
+
     handleSubmit() {
+        fetch('http://192.168.1.55:9000/timelog/countDay/' + moment(new Date()).format('DD-MM-YYYY'), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            timeout: 5000,
+        }).then((response) => response.json())
+            .then((res) => {
+                // console.log(res);
+                this.props.getAllUsers(res);
+            }).catch(error => {
+            console.log(error);
+        });
         this.props.onLogin(this.state.username, this.state.password);
+
         fetch('http://192.168.1.55:9000/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            timeout: 5000,
             body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
@@ -50,7 +70,8 @@ export default class LoginView extends Component<Props> {
             .then((res) => {
                 console.log(res);
                 this.props.onLoginSuccess(res);
-                if (res['status'] === 'OK'){
+                this.setState({loading: false});
+                if (res['status'] === 'OK') {
                     this.props.navigation.navigate('TabMain');
                 } else {
                     this.setState({isShow: true});
@@ -60,11 +81,14 @@ export default class LoginView extends Component<Props> {
             console.log(error);
             this.props.onLoginFail(error);
             this.setState({isShow: true});
+            this.setState({loading: false});
             this.setState({error: error})
         });
+
     }
+
     isValid() {
-        const { username, password } = this.state;
+        const {username, password} = this.state;
         let valid = false;
 
         if (username.length > 0 && password.length > 0) {
@@ -72,47 +96,49 @@ export default class LoginView extends Component<Props> {
         }
 
         if (username.length === 0) {
-            this.setState({ error: 'You must enter an username' });
+            this.setState({error: 'You must enter an username'});
             this.setState({isShow: true});
         } else if (password.length === 0) {
-            this.setState({ error: 'You must enter a password' });
+            this.setState({error: 'You must enter a password'});
             this.setState({isShow: true});
         }
         return valid;
     }
+
     render() {
         return (
             <View style={BaseStyles.screen.mainContainer}>
+
                 <StatusBar
                     backgroundColor='#026dc9'
                     barStyle='light-content'
                 />
-                <Header
-                    centerComponent={
-                        <View style={{height: 120, width: 300, justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{
-                                fontSize: 40,
-                                textAlign: 'center',
-                                color: '#FFFFFF',
-                                fontFamily: 'Montserrat-Bold'
-                            }}>
-                                OHZE
-                            </Text>
-                            <Text style={{
-                                fontSize: 17,
-                                textAlign: 'center',
-                                color: '#FFFFFF',
-                                fontFamily: 'Montserrat-Bold'
-                            }}>
-                                MANAGEMENT TOOL
-                            </Text>
-                        </View>
-                    }
-                    backgroundColor='#2699FB'
-                    innerContainerStyles={{justifyContent: 'center'}}
-                    outerContainerStyles={{height: 150}}
-                />
-
+                <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 150,
+                    width: width,
+                    backgroundColor: '#2699FB'
+                }}>
+                    <View style={{height: 120, width: 300, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text style={{
+                            fontSize: 40,
+                            textAlign: 'center',
+                            color: '#FFFFFF',
+                            fontFamily: 'Montserrat-Bold'
+                        }}>
+                            OHZE
+                        </Text>
+                        <Text style={{
+                            fontSize: 17,
+                            textAlign: 'center',
+                            color: '#FFFFFF',
+                            fontFamily: 'Montserrat-Bold'
+                        }}>
+                            MANAGEMENT TOOL
+                        </Text>
+                    </View>
+                </View>
                 <View style={{marginTop: 40, justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{
                         fontSize: 30,
@@ -181,8 +207,9 @@ export default class LoginView extends Component<Props> {
                     </View>
                     <TouchableOpacity style={styles.loginButton}
                                       onPress={() => {
-                                          if (this.isValid()){
+                                          if (this.isValid()) {
                                               this.handleSubmit();
+                                              this.setState({loading: true})
                                           }
                                       }}>
                         <Text style={styles.loginText}>
@@ -203,18 +230,40 @@ export default class LoginView extends Component<Props> {
                 </View>
                 <Popup ref={ref => (this.popup = ref)} title='Reset Password' iconName={Icons.build_bold}
                        buttonTitle='Send vertification' placeHolder2='Mật khẩu mới' placeHolder='Mật khẩu cũ'/>
-                { this.state.isShow ?
-                    Alert.alert(
-                        'Login Fail',
-                        this.state.error,
-                        [
-                            {text: 'Ok', onPress: () => this.setState({isShow: false}), style: 'Ok'},
-                        ]
-                    )
+                {/*{this.state.isShow ?*/}
+                    {/*Alert.alert(*/}
+                        {/*'Login Fail',*/}
+                        {/*this.state.error,*/}
+                        {/*[*/}
+                            {/*{text: 'Ok', onPress: () => this.setState({isShow: false}), style: 'Ok'},*/}
+                        {/*]*/}
+                    {/*)*/}
+                    {/*:*/}
+                    {/*null*/}
+                {/*}*/}
+                {this.state.loading ?
+                    <View style={{
+                        position: 'absolute',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0,0,0,0.4)',
+                        elevation: 7
+                    }}>
+                        <Progress.Circle
+                            color='red'
+                            progress={this.state.progress}
+                            indeterminate={this.state.indeterminate}
+                        />
+                    </View>
                     :
                     null
                 }
             </View>
+
         );
     }
 }
