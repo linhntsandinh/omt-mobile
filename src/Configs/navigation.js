@@ -73,6 +73,9 @@ const Navigation = createStackNavigator(
                         navigationOptions: {
                             tabBarLabel: 'Event',
                             tabBarIcon: getIconTab(Icons.podium),
+                            // tabBarOnPress: ({ navigation, defaultHandler }) => {
+                            //     defaultHandler();
+                            // },
                         },
 
                     },
