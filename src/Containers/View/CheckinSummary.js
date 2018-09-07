@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import {View} from '../../Components'
 import {BaseStyles} from '../../Theme'
-import {width} from "../../Configs/Consts";
+import Consts, {width} from "../../Configs/Consts";
 import Text from "../../Components/Base/Text";
 import {FlatList} from "react-native";
 import {Header} from "react-native-elements";
 import moment from "moment/moment";
+import {NavigationEvents} from 'react-navigation';
 
 export default class CheckinSummary extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     handleSubmit() {
-        fetch('http://192.168.1.55:9000/timelog/count/' + moment(new Date()).format('DD-MM-YYYY'), {
+        fetch(Consts.api_url +  '/timelog/count/' + moment(new Date()).format('DD-MM-YYYY'), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,12 +23,18 @@ export default class CheckinSummary extends Component {
             console.log(error);
         });
     }
-
+    constructor(props) {
+        super(props);
+    }
+    componentWillUpdate(){
+        this.handleSubmit();
+    }
     render() {
         return (
             <View
                 style={BaseStyles.screen.mainContainer}
             >
+
                 <Header
                     centerComponent={
                         <View style={{
@@ -41,7 +44,7 @@ export default class CheckinSummary extends Component {
                             flexDirection: 'row',
                             alignItems: 'center',
                         }}
-                              onPress={this.handleSubmit()}
+                              // onPress={this.handleSubmit()}
                         >
                             <Text
                                 fontSize={24}

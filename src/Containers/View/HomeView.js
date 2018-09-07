@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {FlatList, Image, Keyboard, StatusBar, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {Icons} from "../../Assets";
 import InputText from "../../Components/Base/InputText";
-import {width} from "../../Configs/Consts"
+import Consts, {width} from "../../Configs/Consts"
 import moment from 'moment'
 
 export default class Home extends Component {
@@ -14,13 +14,14 @@ export default class Home extends Component {
         this.state = {
             isSearch: false,
             textSearch: '',
-            isDetailShow: null,
+            isDetailShow: -1,
             isCheckout: false,
             checkoutId: null,
             startTime: null
         };
         this.handleCheckin = this.handleCheckin.bind(this);
         this.handleCheckout = this.handleCheckout.bind(this);
+        console.log(new Date().toLocaleTimeString())
 
     }
 
@@ -33,7 +34,7 @@ export default class Home extends Component {
     }
 
     handleCheckout() {
-        fetch('http://192.168.1.55:9000/timelog/update', {
+        fetch(Consts.api_url + '/timelog/update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ export default class Home extends Component {
     }
 
     handleCheckin() {
-        fetch('http://192.168.1.55:9000/timelog/insert', {
+        fetch(Consts.api_url +  '/timelog/insert', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -135,7 +136,7 @@ export default class Home extends Component {
                     <View
                         style={{margin: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
                         <TouchableOpacity onPress={() => {
-                            this.setState({isDetailShow: 'hello'});
+
                         }}>
                             <Image source={require('../../Assets/Image/wallhaven-367110.png')}
                                    style={{width: 100, height: 100, borderRadius: 70}}/>
@@ -192,6 +193,7 @@ export default class Home extends Component {
                 </TouchableOpacity>
                 <FlatList
                     data={this.props.all_users.data}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({item, index}) =>
                         <View>
                             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -206,9 +208,7 @@ export default class Home extends Component {
                                 </View>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        console.log(this.state.isDetailShow, index);
                                         this.setState({isDetailShow: index});
-                                        console.log(this.state.isDetailShow, index)
                                     }}
                                     style={{
                                         width: width - 20,
@@ -219,6 +219,9 @@ export default class Home extends Component {
                                         paddingHorizontal: 20
                                     }}>
                                     <TouchableOpacity
+                                        onPress={() => {
+                                            console.log(this.state.isDetailShow)
+                                        }}
                                         // onPress={() => this.props.navigation.navigate('Profile')}
                                     >
                                         <Image source={require('../../Assets/Image/wallhaven-367110.png')}

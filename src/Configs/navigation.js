@@ -72,8 +72,9 @@ const Navigation = createStackNavigator(
                         screen: CheckinSummary,
                         navigationOptions: {
                             tabBarLabel: 'Event',
-                            tabBarIcon: getIconTab(Icons.podium)
-                        }
+                            tabBarIcon: getIconTab(Icons.podium),
+                        },
+
                     },
                 }, {
                     swipeEnabled: false,

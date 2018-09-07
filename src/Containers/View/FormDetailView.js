@@ -65,7 +65,7 @@ export default class FormDetailView extends Component<Props> {
                                 size={25}
                                 onPress={() => {
                                     this.setState({isEdit: !isEdit});
-                                    fetch('http://192.168.1.55:9000/absence/insert', {
+                                    fetch( Consts.api_url + '/absence/insert', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',

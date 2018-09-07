@@ -3,7 +3,6 @@ import {Dimensions} from "react-native";
 const guidelineBaseWidth = 1080;
 const guidelineBaseHeight = 1920;
 const scale = size => width / guidelineBaseWidth * size;
-const verticalScale = size => height / guidelineBaseHeight * size;
 export const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
 export const width = Dimensions.get('window').width;
 export const height = Dimensions.get('window').height;
@@ -93,5 +92,5 @@ export default  {
         NguyenTheLinh: 'Nguyễn Thế Linh',
         BuiVietThanh: 'Bùi Việt Thành'
     },
-    form_test: [{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}, {key: 'g'}]
+    api_url: 'http://192.168.1.90:9000'
 };

@@ -10,7 +10,7 @@ import Icon from "../../Components/Base/Icon";
 import {BaseStyles} from "../../Theme";
 import Icons from "../../Assets/Icons";
 import Popup from "../../Components/Base/Popup";
-import {width} from "../../Configs/Consts"
+import Consts, {width} from "../../Configs/Consts"
 import * as Progress from 'react-native-progress';
 import moment from "moment/moment";
 
@@ -41,7 +41,7 @@ export default class LoginView extends Component<Props> {
     }
 
     handleSubmit() {
-        fetch('http://192.168.1.55:9000/timelog/countDay/' + moment(new Date()).format('DD-MM-YYYY'), {
+        fetch(Consts.api_url + '/timelog/countDay/' + moment(new Date()).format('DD-MM-YYYY'), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,14 +49,14 @@ export default class LoginView extends Component<Props> {
             timeout: 5000,
         }).then((response) => response.json())
             .then((res) => {
-                // console.log(res);
+                console.log(res);
                 this.props.getAllUsers(res);
             }).catch(error => {
             console.log(error);
         });
         this.props.onLogin(this.state.username, this.state.password);
 
-        fetch('http://192.168.1.55:9000/user/login', {
+        fetch(Consts.api_url + '/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
