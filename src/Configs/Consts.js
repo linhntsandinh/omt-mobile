@@ -92,5 +92,5 @@ export default  {
         NguyenTheLinh: 'Nguyễn Thế Linh',
         BuiVietThanh: 'Bùi Việt Thành'
     },
-    api_url: 'http://192.168.1.90:9000'
+    api_url: 'http://192.168.1.57:9000'
 };

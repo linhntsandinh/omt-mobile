@@ -125,7 +125,7 @@ export default class LoginView extends Component<Props> {
                             fontSize: 40,
                             textAlign: 'center',
                             color: '#FFFFFF',
-                            fontFamily: 'Montserrat-Bold'
+                            fontFamily: 'Montserrat-SemiBold'
                         }}>
                             OHZE
                         </Text>
@@ -133,7 +133,7 @@ export default class LoginView extends Component<Props> {
                             fontSize: 17,
                             textAlign: 'center',
                             color: '#FFFFFF',
-                            fontFamily: 'Montserrat-Bold'
+                            fontFamily: 'Montserrat'
                         }}>
                             MANAGEMENT TOOL
                         </Text>

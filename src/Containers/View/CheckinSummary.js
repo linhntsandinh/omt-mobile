@@ -72,11 +72,17 @@ export default class CheckinSummary extends Component {
                     <FlatList
                         data={this.props.all_users_summary['count']}
                         keyExtractor={(item, index) => index.toString()}
-                        style={{marginTop: 25}}
+                        style={{marginTop: 10}}
                         renderItem={({item, index}) =>
                             <View>
-                                <View style={{justifyContent: 'center', alignItems: 'center',}}>
-                                    <Text fontSize={15}>
+                                <View style={{justifyContent: 'center', alignItems: 'center',  marginTop: 8,}}>
+                                    <Text
+                                        fontSize={20}
+                                        color='#008BFF'
+                                        bold={true}
+                                        align='center'
+                                        style={{marginBottom: 15}}
+                                    >
                                         {item['name']}
                                     </Text>
                                     <View style={{
@@ -86,21 +92,28 @@ export default class CheckinSummary extends Component {
                                         justifyContent: 'space-between',
                                         flexDirection: 'row',
                                         // backgroundColor: '#F5F5F5',
-
+                                        paddingHorizontal: 25
                                     }}>
 
                                         <View style={{
-                                            justifyContent: 'space-between',
                                             flexDirection: 'column',
                                             marginBottom: 15
                                         }}>
-                                            <Text>
+                                            <Text
+                                                style={{marginBottom: 10}}
+                                                color='#828282'
+                                            >
                                                 Tổng số ngày công:
                                             </Text>
-                                            <Text>
+                                            <Text
+                                                style={{marginBottom: 10}}
+                                                color='#828282'
+                                            >
                                                 Ngày đi về sớm:
                                             </Text>
-                                            <Text>
+                                            <Text
+                                                color='#828282'
+                                            >
                                                 Ngày đi muộn:
                                             </Text>
                                         </View>
@@ -109,24 +122,33 @@ export default class CheckinSummary extends Component {
                                             flexDirection: 'column',
                                             marginBottom: 15
                                         }}>
-                                            <Text>
+                                            <Text
+                                                style={{marginBottom: 10}}
+                                                color='#828282'
+                                            >
                                                 {item['count']}
                                             </Text>
-                                            <Text>
+                                            <Text
+                                                style={{marginBottom: 10}}
+                                                color='#828282'
+                                            >
                                                 {item['early']}
                                             </Text>
-                                            <Text>
+                                            <Text
+                                                color='#828282'
+                                            >
                                                 {item['late']}
                                             </Text>
                                         </View>
                                     </View>
                                     <View
                                         style={{
-                                            width: width,
+                                            width: width - 35,
                                             height: 1,
-                                            borderColor: '#F1F1F1',
+                                            borderColor: '#828282',
                                             borderWidth: 1,
-                                            marginVertical: 5
+                                            marginVertical: 5,
+                                            marginTop: 10
                                         }}>
                                     </View>
                                 </View>

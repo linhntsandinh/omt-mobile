@@ -1,11 +1,12 @@
 import {Icon, View} from '../../Components'
 import {BaseStyles} from '../../Theme'
 import React, {Component} from 'react';
-import {FlatList, Image, Keyboard, StatusBar, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {FlatList, Image, Keyboard, StatusBar, StyleSheet, TouchableOpacity} from 'react-native';
 import {Icons} from "../../Assets";
 import InputText from "../../Components/Base/InputText";
 import Consts, {width} from "../../Configs/Consts"
 import moment from 'moment'
+import Text from "../../Components/Base/Text";
 
 export default class Home extends Component {
     constructor(props) {
@@ -17,7 +18,8 @@ export default class Home extends Component {
             isDetailShow: -1,
             isCheckout: false,
             checkoutId: null,
-            startTime: null
+            startTime: null,
+            endTime: null
         };
         this.handleCheckin = this.handleCheckin.bind(this);
         this.handleCheckout = this.handleCheckout.bind(this);
@@ -53,13 +55,14 @@ export default class Home extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({isCheckout: !this.state.isCheckout})
+                this.setState({endTime: new Date().toLocaleTimeString()})
             }).catch(error => {
             console.log(error);
         });
     }
 
     handleCheckin() {
-        fetch(Consts.api_url +  '/timelog/insert', {
+        fetch(Consts.api_url + '/timelog/insert', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +80,7 @@ export default class Home extends Component {
             .then((res) => {
                 console.log(res);
                 this.setState({checkoutId: res['data']});
-                this.setState({startTime: new Date().toLocaleTimeString()})
+                this.setState({startTime: new Date().toLocaleTimeString()});
                 this.setState({isCheckout: !this.state.isCheckout})
             }).catch(error => {
             console.log(error);
@@ -129,34 +132,33 @@ export default class Home extends Component {
                     </View>
                 </View>
                 <View
-                    style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 5}}>
+                    style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 8}}>
                 </View>
                 <TouchableOpacity
-                    style={{width: width - 20, height: 150, backgroundColor: '#E1F2FF', alignSelf: 'center'}}>
+                    style={{width: width - 30, height: 110, backgroundColor: '#d8edff', alignSelf: 'center'}}>
                     <View
-                        style={{margin: 20, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
+                        style={{marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
                         <TouchableOpacity onPress={() => {
 
                         }}>
                             <Image source={require('../../Assets/Image/wallhaven-367110.png')}
-                                   style={{width: 100, height: 100, borderRadius: 70}}/>
+                                   style={{width: 90, height: 90, borderRadius: 60}}/>
                         </TouchableOpacity>
                         <View>
                             <Text style={{
-                                fontSize: 20,
-                                textAlign: 'center',
-                                color: '#2799FB',
-                                marginTop: 10,
-                                fontFamily: 'Montserrat-Bold',
                                 marginLeft: 15,
                                 marginBottom: 10
                             }}
+                                  fontSize={22}
+                                  color='#008BFF'
+                                  bold={true}
+                                  align='center'
                             >
                                 {this.props.user['Profile']['full_name']}
                             </Text>
                             <TouchableOpacity style={{
-                                width: width - 185,
-                                height: 55,
+                                width: width - 175,
+                                height: 50,
                                 backgroundColor: '#39B774',
                                 borderRadius: 70,
                                 alignItems: 'center',
@@ -175,12 +177,20 @@ export default class Home extends Component {
                                               }}
                             >
                                 {this.state.isCheckout ?
-                                    <Text style={styles.text}
+                                    <Text
+                                        fontSize={20}
+                                        color='white'
+                                        bold={true}
+                                        align='center'
                                     >
                                         CHECK OUT
                                     </Text>
                                     :
-                                    <Text style={styles.text}
+                                    <Text
+                                        fontSize={20}
+                                        color='white'
+                                        bold={true}
+                                        align='center'
                                     >
                                         CHECK IN
                                     </Text>
@@ -189,52 +199,66 @@ export default class Home extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-
                 </TouchableOpacity>
+                <View
+                    style={{
+                        width: width,
+                        height: 1,
+                        borderColor: '#F1F1F1',
+                        borderWidth: 1,
+                        marginVertical: 8
+                    }}>
+                </View>
                 <FlatList
+                    extraData={this.state}
                     data={this.props.all_users.data}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item, index}) =>
                         <View>
                             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                                <View
-                                    style={{
-                                        width: width,
-                                        height: 1,
-                                        borderColor: '#F1F1F1',
-                                        borderWidth: 1,
-                                        marginVertical: 5
-                                    }}>
-                                </View>
+                                {index > 0
+                                    ?
+                                    <View
+                                        style={{
+                                            width: width - 30,
+                                            height: 1,
+                                            borderColor: '#F1F1F1',
+                                            borderWidth: 1,
+                                            marginVertical: 5
+                                        }}>
+                                    </View>
+                                    :
+                                    null
+                                }
                                 <TouchableOpacity
                                     onPress={() => {
-                                        this.setState({isDetailShow: index});
+                                        this.setState({...this.state, isDetailShow: index});
+                                        if (this.state.isDetailShow === index) {
+                                            this.setState({isDetailShow: null})
+                                        }
                                     }}
                                     style={{
-                                        width: width - 20,
-                                        justifyContent: 'space-between',
+                                        width: width - 30,
                                         alignItems: 'center',
                                         flexDirection: 'row',
                                         backgroundColor: '#E1F2FF',
-                                        paddingHorizontal: 20
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
                                     }}>
                                     <TouchableOpacity
-                                        onPress={() => {
-                                            console.log(this.state.isDetailShow)
-                                        }}
                                         // onPress={() => this.props.navigation.navigate('Profile')}
                                     >
                                         <Image source={require('../../Assets/Image/wallhaven-367110.png')}
-                                               style={{width: 105, height: 105, borderRadius: 70}}/>
+                                               style={{width: 90, height: 90, borderRadius: 60}}/>
                                     </TouchableOpacity>
-                                    <Text style={{
-                                        fontSize: 20,
-                                        textAlign: 'center',
-                                        color: '#3D5494',
+                                    <Text
+                                        style={{
                                         marginTop: 10,
-                                        fontFamily: 'Montserrat-Bold',
-                                        marginLeft: 15
+                                        marginLeft: 40
                                     }}
+                                        fontSize={22}
+                                        color='#2799FB'
+                                        align='center'
                                     >
                                         {item.profile['full_name']}
                                     </Text>
@@ -281,13 +305,13 @@ export default class Home extends Component {
                                             {item['department']}
                                         </Text>
                                         <Text>
-                                            08:50
+                                            {this.state.startTime}
                                         </Text>
                                         <Text>
-                                            18:00
+                                            {this.state.endTime}
                                         </Text>
                                         <Text>
-                                            02/07/2018
+                                            {moment(new Date()).format('DD-MM-YYYY')}
                                         </Text>
                                         <Text>
                                             Muộn 5 phút
@@ -315,10 +339,5 @@ export default class Home extends Component {
     }
 }
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 20,
-        textAlign: 'center',
-        color: 'white',
-        fontFamily: 'Montserrat-Bold',
-    }
+
 });
