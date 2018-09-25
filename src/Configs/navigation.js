@@ -7,7 +7,6 @@ import {Icons} from '../Assets'
 //all screen
 import Splash from '../Containers/Container/SplashContainer';
 import Home from '../Containers/Container/HomeContainer';
-import ListForm from '../Containers/Container/ListFormContainer';
 import Profile from '../Containers/Container/ProfileContainer';
 import LoginView from "../Containers/Container/LoginContainer";
 import CreateUserPage1 from "../Containers/Container/CreateUserPage1Container";
@@ -16,6 +15,7 @@ import CreateUserPage3 from "../Containers/Container/CreateUserPage3Container";
 import EditMail from "../Containers/Container/EditMailContainer";
 import FormDetailView from "../Containers/Container/FormDetailContainer";
 import CheckinSummary from "../Containers/Container/CheckinSummaryContainer"
+import EmployeeList from "../Containers/Container/EmployeeListContainer"
 
 const getIconTab = (name) => ({tintColor}) => (
     <Icon name={name} color={tintColor} disable/>
@@ -53,19 +53,18 @@ const Navigation = createStackNavigator(
                             tabBarIcon: getIconTab(Icons.calendar)
                         }
                     },
-                    ListForm: {
-                        screen: ListForm,
+                    // ListForm: {
+                    //     screen: ListForm,
+                    //     navigationOptions: {
+                    //         tabBarLabel: 'ListForm',
+                    //         tabBarIcon: getIconTab(Icons.pencil)
+                    //     }
+                    // },
+                    EmployeeList: {
+                        screen: EmployeeList,
                         navigationOptions: {
-                            tabBarLabel: 'ListForm',
-                            tabBarIcon: getIconTab(Icons.pencil)
-                        }
-                    },
-
-                    Profile: {
-                        screen: Profile,
-                        navigationOptions: {
-                            tabBarLabel: 'Profile',
-                            tabBarIcon: getIconTab(Icons.profile)
+                            tabBarLabel: 'Employee List',
+                            tabBarIcon: getIconTab(Icons.list)
                         }
                     },
                     Summary: {
@@ -73,11 +72,14 @@ const Navigation = createStackNavigator(
                         navigationOptions: {
                             tabBarLabel: 'Event',
                             tabBarIcon: getIconTab(Icons.podium),
-                            // tabBarOnPress: ({ navigation, defaultHandler }) => {
-                            //     defaultHandler();
-                            // },
                         },
-
+                    },
+                    Profile: {
+                        screen: Profile,
+                        navigationOptions: {
+                            tabBarLabel: 'Profile',
+                            tabBarIcon: getIconTab(Icons.profile)
+                        }
                     },
                 }, {
                     swipeEnabled: false,

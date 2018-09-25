@@ -130,7 +130,7 @@ export default class ProfileView extends Component {
                             }}
                             color='white'
                             fontSize={20}
-                        > Nguyễn Xuân Trường</Text>
+                        >{this.props.user['Profile']['full_name']}</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={{

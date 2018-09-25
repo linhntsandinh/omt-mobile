@@ -27,5 +27,6 @@ export default {
     arrow_down: 'ios-arrow-down-outline',
     person: 'md-person',
     add_person: 'md-person-add',
-    podium: 'ios-podium-outline'
+    podium: 'ios-podium-outline',
+    list: 'ios-list-outline'
 };

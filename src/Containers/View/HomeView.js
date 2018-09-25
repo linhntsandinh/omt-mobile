@@ -117,6 +117,7 @@ export default class Home extends Component {
                             onPress={() => this.setState({isSearch: !isSearch})}
                             style={{marginTop: 10, marginLeft: 5}}
                             color='#53B2FF'
+                            size={25}
                         />
                         <InputText
                             onChangeText={text => this.setState({textSearch: text})}
@@ -128,6 +129,7 @@ export default class Home extends Component {
                             }}
                             iconRemove={true}
                             color='#CDE7FD'
+                            hintColor='#E1F2FF'
                         />
                     </View>
                 </View>
@@ -135,7 +137,7 @@ export default class Home extends Component {
                     style={{width: width, height: 1, borderColor: '#F1F1F1', borderWidth: 1, marginVertical: 8}}>
                 </View>
                 <TouchableOpacity
-                    style={{width: width - 30, height: 110, backgroundColor: '#d8edff', alignSelf: 'center'}}>
+                    style={{width: width - 30, height: 110, backgroundColor: '#E1F2FF', alignSelf: 'center'}}>
                     <View
                         style={{marginTop: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'row'}}>
                         <TouchableOpacity onPress={() => {
@@ -241,7 +243,7 @@ export default class Home extends Component {
                                         width: width - 30,
                                         alignItems: 'center',
                                         flexDirection: 'row',
-                                        backgroundColor: '#E1F2FF',
+                                        backgroundColor: '#F1F9FF',
                                         paddingHorizontal: 20,
                                         paddingVertical: 5
                                     }}>

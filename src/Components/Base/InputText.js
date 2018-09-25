@@ -15,6 +15,7 @@ export default class InputText extends Component {
         upperCase: PropTypes.bool,
         defaultValue: PropTypes.string,
         hint: PropTypes.string,
+        hintColor: PropTypes.string,
         maxLength: PropTypes.number,
         style: PropTypes.any,
         autoFocus: PropTypes.any,
@@ -104,6 +105,7 @@ export default class InputText extends Component {
             multiline,
             style,
             autoFocus,
+            hintColor,
             hintTop,
             styleConstant,
             maxLength,
@@ -123,6 +125,7 @@ export default class InputText extends Component {
                     maxLength={maxLength}
                     autoFocus={autoFocus}
                     placeholder={hint}
+                    placeholderTextColor={hintColor}
                     blurOnSubmit={true}
                     multiline={multiline}
                     underlineColorAndroid="transparent"
