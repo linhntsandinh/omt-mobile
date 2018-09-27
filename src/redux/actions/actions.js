@@ -26,6 +26,10 @@ export const getAllUsersSummary = (all_users_summary) => ({
     type: 'GET_ALL_USERS_SUMMARY',
     all_users_summary: all_users_summary
 });
+export const getUserSummary = (user_summary) => ({
+    type: 'GET_USER_SUMMARY',
+    user_summary: user_summary
+});
 export const getAbsences = () =>({
 
 });

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     user: null,
     error: '',
     all_users_summary: null,
+    user_summary: null,
     absences: null,
     timeLog: {
         userId: null,
@@ -59,10 +60,15 @@ export default function (state = INITIAL_STATE, action) {
             return {...state,
                 all_users_summary: action.all_users_summary
             };
+        case 'GET_USER_SUMMARY':
+            return {...state,
+                user_summary: action.user_summary
+            }
         case 'GET_ABSENCES':
             return {...state,
                 absence: action.absences
             };
+
         default:
             return state;
     }
